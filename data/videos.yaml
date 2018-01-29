@@ -1,0 +1,26 @@
+# Known keys: (note that all are to be in lower case)
+# (all machine abbreviations such as brjr, rrsr, etc.)
+# advert
+# tutorial
+# demo
+
+videos:
+- title: "The Blue Ripper Jr™ Rail Saw"
+  description: "The Blue Ripper Jr.™ Rail Saw delivers speed, accuracy and quality work in the shop or out on the job site. No gauge, shims, or offset measurements needed."
+  youtube_id: "7vSzVkphmRY"
+  keys:
+  - "advert"
+  - "brjr"
+  - "demo"
+- title: "Perfect seams with the Blue Ripper Jr Rail Saw"
+  description: "How to make perfect stone seams every time with the Blue Ripper Jr™ Rail Saw"
+  youtube_id: "r1EI32f1XeM"
+  keys:
+  - "tutorial"
+  - "brjr"
+- title: "Changing the blade on the Blue Ripper Jr Rail Saw"
+  description: "How to change the blade on the Blue Ripper Jr™ Rail Saw"
+  youtube_id: "HXWGBkKcBJ0"
+  keys:
+  - "tutorial"
+  - "brjr"
