@@ -1,0 +1,8 @@
+baseURL: "https://omegadiamond.com/"
+languageCode: "en-us"
+title: "Omega Diamond Inc."
+
+theme: "2018"
+
+permalinks:
+  product: /:filename
