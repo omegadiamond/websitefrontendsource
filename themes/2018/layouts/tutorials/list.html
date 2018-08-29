@@ -1,0 +1,17 @@
+{{ partial "header.html" . }}
+
+<h1>Tutorial</h1>
+
+<section>
+	<h2>Header 1</h2>
+	{{ range where .Pages "Section" "tutorials" }}
+		<article>
+			<a href="{{ .Permalink }}">
+				<img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+				<h2>{{ .Title }}</h2>
+			</a>
+		</article>
+	{{ end }}
+</section>
+
+{{ partial "footer.html" . }}

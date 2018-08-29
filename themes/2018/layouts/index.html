@@ -1,0 +1,15 @@
+{{ partial "header.html" . }}
+
+<section>
+	<h1>All MDs</h1>
+	{{ range .Pages }}
+	<article>
+		<a href="{{ .Permalink }}">
+			<img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+			<h2>{{ .Title }}</h2>
+		</a>
+	</article>
+	{{ end }}
+</section>
+
+{{ partial "footer.html" . }}

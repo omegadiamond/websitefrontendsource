@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="This is a website description">
+    <title>{{ .Title }}</title>
+</head>
+<body>
+    <header>
+        <a href="{{.Site.BaseURL}}/index.html">
+            <img src="/img/omega-logo.png" alt="Omega Diamond Inc.">
+        </a>
+
+        <!-- Navigation -->
+        <nav>
+            <a href="{{.Site.BaseURL}}/index.html">Home</a>
+            <a href="{{.Site.BaseURL}}/products">Products</a>
+            <a href="{{.Site.BaseURL}}/tutorials">Tutorials</a>
+            <a href="#">Testimonials</a>
+            <a href="{{.Site.BaseURL}}/videos">Videos</a>
+            <a href="#">Specs</a>
+            <a href="{{.Site.BaseURL}}/contact">Contact</a>
+            <a href="#">Warranty</a>
+            <a href="#">About Us</a>
+        </nav>
+
+        <!-- Search & Shopping Cart -->
+        <span>
+            <a href="#">
+                <img src="/img/cart-icon.png" alt="Cart">
+            </a>
+            <form method="POST" action="#">
+                <input type="search" name="search" placeholder="Search">
+                <input type="image" src="/img/search-icon.png" alt="Search" value="Search">
+            </form>
+        </span>
+    </header>

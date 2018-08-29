@@ -1,0 +1,178 @@
+{{ partial "header.html" . }}
+
+    <h1>{{ .Title }}</h1>
+
+    {{/*  <div>
+        <a href="#">Product Description</a>
+        <a href="#">Specs</a>
+        <a href="#">Articles & Tutorials</a>
+        <a href="#">Attachments</a>
+    </div>  */}}
+
+    {{ .TableOfContents }}
+
+    Price: $4,321.00
+    SKU: {{ .Params.reference}}
+    <form method="POST" action="#">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" value="1" min="1" required>
+        <input type="submit" value="Add to Cart">
+    </form>
+
+    <article>
+        {{ .Content }}
+
+        <section>
+            <h2>Image Gallery</h2>
+            <a href="#"><img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="Example"></a>
+            <a href="#"><img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="Example"></a>
+            <a href="#"><img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="Example"></a>
+            <a href="#"><img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="Example"></a>
+            <a href="#"><img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="Example"></a>
+            <a href="#"><img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="Example"></a>
+            <a href="#"><img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="Example"></a>
+            <a href="#"><img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="Example"></a>
+            <a href="#"><img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="Example"></a>
+            <a href="#"><img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="Example"></a>
+        </section>
+
+        <section>
+            <h2>Video Gallery</h2>
+
+            <article>
+                <a href="#">
+                    <img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+                    <p>This is example video</p>
+                </a>
+            </article>
+            <article>
+                <a href="#">
+                    <img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+                    <p>This is example video</p>
+                </a>
+            </article>
+            <article>
+                <a href="#">
+                    <img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+                    <p>This is example video</p>
+                </a>
+            </article>
+        </section>
+
+        <section>
+            <h2>Related Products</h2>
+
+            <article>
+                <a href="#">
+                    <img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+                    <h2>Card Example</h2>
+                </a>
+            </article>
+            <article>
+                <a href="#">
+                    <img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+                    <h2>Card Example</h2>
+                </a>
+            </article>
+            <article>
+                <a href="#">
+                    <img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+                    <h2>Card Example</h2>
+                </a>
+            </article>
+            <article>
+                <a href="#">
+                    <img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+                    <h2>Card Example</h2>
+                </a>
+            </article>
+            <article>
+                <a href="#">
+                    <img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+                    <h2>Card Example</h2>
+                </a>
+            </article>
+            <article>
+                <a href="#">
+                    <img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+                    <h2>Card Example</h2>
+                </a>
+            </article>
+        </section>
+    </article>
+
+    <!-- Specs  -->
+    <article id="specs">
+        <h1>Specs</h1>
+
+        <ul>
+            <li>Up to 10 FPM cut speed</li>
+            <li>
+                1730 RPM Air Cooled Induction Motor (2hp & 3hp models)
+                <ul>
+                    <li>2hp 110v at 18 Amps</li>
+                    <li>3hp 220v at 12.4 Amps</li>
+                </ul>
+            </li>
+            <li>
+                3450 RPM Custom Water-Cooled Induction Motor (5hp model)
+                <ul>
+                    <li>5hp 220v at 22 Amps</li>
+                </ul>
+            </li>
+        </ul>
+
+        <table>
+            <tr>
+                <td>Cut Speed:</td>
+                <td>up to 10 FPM</td>
+            </tr>
+            <tr>
+                <td>Cooled Induction:</td>
+                <td>1730 RPM Air</td>
+            </tr>
+            <tr>
+                <td>Motor:</td>
+                <td>3hp 220v at 12.4 Amps</td>
+            </tr>
+            <tr>
+                <td>Blade:</td>
+                <td>14 inch</td>
+            </tr>
+            <tr>
+                <td>Blade Arbor:</td>
+                <td>60mm</td>
+            </tr>
+        </table>
+    </article>
+
+    <article id="articles">
+        <h1>Articles & Tutorials</h1>
+        <ul>
+            <li>
+                <a href="#">How to Check Blue Ripper Rail Straightness</a>
+            </li>
+            <li>
+                <a href="#">How to Check Blue Ripper Rail Straightness</a>
+            </li>
+            <li>
+                <a href="#">How to Check Blue Ripper Rail Straightness</a>
+            </li>
+            <li>
+                <a href="#">How to Check Blue Ripper Rail Straightness</a>
+            </li>
+        </ul>
+    </article>
+
+    <article id="attachments">
+        <h1>Attachments</h1>
+
+        <ul>
+            <li><a href="#">Attachement 1</a></li>
+            <li><a href="#">Attachement 2</a></li>
+            <li><a href="#">Attachement 3</a></li>
+            <li><a href="#">Attachement 4</a></li>
+        </ul>
+    </article>
+
+{{ partial "footer.html" . }}

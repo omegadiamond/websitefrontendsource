@@ -1,0 +1,15 @@
+{{ partial "header.html" . }}
+
+
+<h1>Products</h1>
+{{ range where .Pages "Section" "products" }}
+<article>
+	<a href="{{ .Permalink }}">
+		<img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+		<h2>{{ .Title }}</h2>
+	</a>
+</article>
+{{ end }}
+
+
+{{ partial "footer.html" . }}
