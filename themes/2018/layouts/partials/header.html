@@ -6,34 +6,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="description" content="This is a website description">
     <title>{{ .Title }}</title>
+
+    <!-- Fallback to homescreen for Chrome <39 on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Material Design Lite Extensions">
+    <link rel="icon" sizes="192x192" href="{{.Site.BaseURL}}assets/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite Extensions">
+    <link rel="apple-touch-icon" href="{{.Site.BaseURL}}assets/ios-desktop.png">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{.Site.BaseURL}}assets/favicon.png">
+
+    <!-- styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-amber.min.css" />
+    <link rel="stylesheet" href="{{.Site.BaseURL}}/styles/main.css">
 </head>
 <body>
-    <header>
-        <a href="{{.Site.BaseURL}}/index.html">
-            <img src="/img/omega-logo.png" alt="Omega Diamond Inc.">
-        </a>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
 
-        <!-- Navigation -->
-        <nav>
-            <a href="{{.Site.BaseURL}}/index.html">Home</a>
-            <a href="{{.Site.BaseURL}}/products">Products</a>
-            <a href="{{.Site.BaseURL}}/tutorials">Tutorials</a>
-            <a href="#">Testimonials</a>
-            <a href="{{.Site.BaseURL}}/videos">Videos</a>
-            <a href="#">Specs</a>
-            <a href="{{.Site.BaseURL}}/contact">Contact</a>
-            <a href="#">Warranty</a>
-            <a href="#">About Us</a>
-        </nav>
+    <!-- Header -->
+    <header class="mdl-layout__header mdl-layout__header--waterfall">
+        <div class="mdl-layout__header-row">
 
-        <!-- Search & Shopping Cart -->
-        <span>
-            <a href="#">
-                <img src="/img/cart-icon.png" alt="Cart">
+            <!-- logo-->
+            <a class="mdl-layout-title" href="{{.Site.BaseURL}}index.html">
+                <img src="{{.Site.BaseURL}}img/omega-logo.png" alt="Omega Diamond Inc.">
             </a>
-            <form method="POST" action="#">
-                <input type="search" name="search" placeholder="Search">
-                <input type="image" src="/img/search-icon.png" alt="Search" value="Search">
+
+            <!-- space -->
+            <div class="mdl-layout-spacer"></div>
+
+            <!-- nav -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link" href="{{.Site.BaseURL}}index.html">Home</a>
+                <a class="mdl-navigation__link" href="{{.Site.BaseURL}}products">Products</a>
+                <a class="mdl-navigation__link" href="{{.Site.BaseURL}}tutorials">Tutorials</a>
+                <a class="mdl-navigation__link" href="#">Testimonials</a>
+                <a class="mdl-navigation__link" href="{{.Site.BaseURL}}videos">Videos</a>
+                <a class="mdl-navigation__link" href="#">Specs</a>
+                <a class="mdl-navigation__link" href="{{.Site.BaseURL}}contact">Contact</a>
+                <a class="mdl-navigation__link" href="#">Warranty</a>
+                <a class="mdl-navigation__link" href="#">About Us</a>
+            </nav>
+
+            <!-- search -->
+            <form action="#" method="GET" class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
+                    <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" name="search" id="search-field">
+                </div>
             </form>
-        </span>
+
+            <!-- shopping cart -->
+            <a href="#" class="mdl-button mdl-js-button mdl-button--icon" style="overflow: visible;">
+                <i class="material-icons mdl-badge mdl-badge--overlap" data-badge="5">shopping_cart</i>
+            </a>
+
+            <!-- search -->
+            <!--<form class="omg-search-box mdl-textfield mdl-js-textfield mdl-textfield&#45;&#45;expandable mdl-textfield&#45;&#45;floating-label mdl-textfield&#45;&#45;align-right"
+                action="#" method="GET">
+                <label class="mdl-button mdl-js-button mdl-button&#45;&#45;icon" for="search-field">
+                    <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" id="search-field">
+                </div>
+            </form>-->
+
+            <!-- shopping cart -->
+            <!--<a class="mdl-button mdl-js-button mdl-button&#45;&#45;icon" href="#"
+               style="overflow: visible;">
+                <i class="material-icons mdl-badge mdl-badge&#45;&#45;overlap" data-badge="3">shopping_cart</i>
+            </a>-->
+        </div>
     </header>
+
+    <!-- Drawer -->
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout__title">Simple Title</span>
+
+        <!-- nav -->
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="#">Home</a>
+            <a class="mdl-navigation__link" href="#">Tutorials</a>
+            <a class="mdl-navigation__link" href="#">Testimonials</a>
+            <a class="mdl-navigation__link" href="#">Videos</a>
+            <a class="mdl-navigation__link" href="#">Specs</a>
+            <a class="mdl-navigation__link" href="#">Contact</a>
+            <a class="mdl-navigation__link" href="#">Warranty</a>
+            <a class="mdl-navigation__link" href="#">About Us</a>
+        </nav>
+    </div>
+
+    <main class="mdl-layout__content">
