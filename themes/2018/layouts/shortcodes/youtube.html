@@ -1,1 +1,30 @@
-{{ now.Format "2006" }}
+{{ range $index, $element := $.Site.Data.videos.videos }}
+
+    {{ if $.Get "key" }}
+        {{ if in .keys ($.Get "key") }}
+            {{ $.Scratch.SetInMap "array" (string $index) $element }}
+        {{ end }}
+
+    {{ else if $.Get "youtube_id" }}
+        {{ if eq ($.Get "youtube_id") $element.youtube_id }}
+            {{ $.Scratch.SetInMap "array" (string $index) $element }}
+        {{ end }}
+
+    {{ else }}
+        {{ $.Scratch.SetInMap "array" (string $index) $element }}
+    {{ end }}
+
+{{ end }}
+<hr>
+
+
+{{ range $.Scratch.Get "array" }}
+    <section>
+        {{ if not ($.Get "hideTitle")}}{{ if .title }}<h2>{{ .title }}</h2>{{ end }}{{ end }}
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ .youtube_id }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        {{ if .description }}<p>{{ .description }}</p> {{ end }}
+    </section>
+{{ end }}
+
+
+{{ $.Scratch.Delete "array" }}

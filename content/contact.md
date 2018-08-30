@@ -1,8 +1,7 @@
 ---
 title: Contact
 date: 2018-08-28T16:04:44-07:00
-draft: true
-# Used for general website pages - eg. About Us, Warranty, etc.
+draft: false
 ---
 
 Omega Diamond's Headquarters and primary R&D facility is located at:\
