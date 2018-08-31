@@ -19,11 +19,27 @@
 
 
 {{ range $.Scratch.Get "array" }}
-    <section>
+    <div class="mdl-card mdl-shadow--4dp">
+        <div class="mdl-card__title">
+            <a href="#">
+                <h2 class="mdl-card__title-text">{{ .title }}</h2>
+            </a>
+        </div>
+        <div class="mdl-card__media">
+            <a href="#">
+                <img src="https://img.youtube.com/vi/{{ .youtube_id }}/0.jpg" alt="{{ .title }}">
+            </a>
+            <!--<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ .youtube_id }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+        </div>
+        {{ if .description }}<div class="mdl-card__supporting-text">{{ .description }}</div> {{ end }}
+    </div>
+    <br>
+
+    <!--<section>
         {{ if not ($.Get "hideTitle")}}{{ if .title }}<h2>{{ .title }}</h2>{{ end }}{{ end }}
         <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ .youtube_id }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         {{ if .description }}<p>{{ .description }}</p> {{ end }}
-    </section>
+    </section>-->
 {{ end }}
 
 

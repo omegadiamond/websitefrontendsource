@@ -1,17 +1,41 @@
 {{ partial "header.html" . }}
 
-<section>
-	<h1>All MDs</h1>
-	{{ range .Pages }}
-	<article>
-		<a href="{{ .Permalink }}">
-			<img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
-			<h2>{{ .Title }}</h2>
-		</a>
-	</article>
-	{{ end }}
-</section>
 
+
+<h1>All MDs</h1>
+
+{{ range where .Pages "Section" "!=" "" }}
+	<article class="mdl-card mdl-shadow--4dp">
+		<div class="mdl-card__title">
+			<a class="mdl-card__title-text" href="{{ .Permalink }}">
+				<h2>{{ .Title }} ({{ .Section }})</h2>
+			</a>
+		</div>
+
+		<div class="mdl-card__media" style="padding: 10px;">
+			<a href="{{ .Permalink }}">
+				<img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+			</a>
+		</div>
+
+		<!--<div class="mdl-card__supporting-text">
+			This is description, this is description, this is description, this is description, this is description
+		</div>-->
+
+		<div class="mdl-card__actions mdl-card--border">
+			<a class="mdl-button mdl-js-button mdl-button--icon mdl-shadow--2dp" href="#" title="Add to Cart">
+				<i class="material-icons">add_shopping_cart</i>
+			</a>
+		</div>
+
+		<div class="mdl-card__menu">
+			<a class="mdl-button--icon mdl-js-button mdl-button--icon mdl-js-ripple-effect" href="">
+				<i class="material-icons">info</i>
+			</a>
+		</div>
+	</article>
+<br>
+{{ end }}
 
 
 
