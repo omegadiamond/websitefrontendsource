@@ -17,29 +17,7 @@
 
     {{/*  Contact  */}}
     {{ if eq .Title "Contact" }}
-        <form method="POST" action="#">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" required minlength="2">
-
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
-
-            <label for="subject">Subject</label>
-            <input type="text" name="subject" id="subject" required minlength="5">
-
-            <label for="category">Category</label>
-            <select name="category" id="category" required>
-                <option value="">-- Choose One --</option>
-                <option value="1">Product Information</option>
-                <option value="2">Product Suggestion</option>
-                <option value="3">Website Feedback</option>
-            </select>
-
-            <label for="message">Message</label>
-            <textarea name="message" id="message" required minlength="10"></textarea>
-
-            <input type="submit" value="Send">
-        </form>
+        {{ partial "contact-form.html" . }}
     {{ end }}
 
 {{ partial "footer.html" . }}

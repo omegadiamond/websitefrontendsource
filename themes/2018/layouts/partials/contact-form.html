@@ -1,0 +1,36 @@
+<form method="post" action="#">
+
+    <div class="mdl-textfield mdl-js-textfield">
+        <input class="mdl-textfield__input" type="text" id="name" name="name" required>
+        <label class="mdl-textfield__label" for="name">Name</label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield">
+        <input class="mdl-textfield__input" type="email" id="email" name="email" required>
+        <label class="mdl-textfield__label" for="email">Email</label>
+        <span class="mdl-textfield__error">Invalid Email Address</span>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield">
+        <input class="mdl-textfield__input" type="text" id="subject" name="name" required>
+        <label class="mdl-textfield__label" for="subject">Subject</label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield">
+        <select class="mdl-textfield__input" id="category" name="category" required>
+            <option></option>
+            <option value="Product Information">Product Information</option>
+            <option value="Product Suggestion">Product Suggestion</option>
+            <option value="Website Feedback">Website Feedback</option>
+        </select>
+        <label class="mdl-textfield__label" for="category">Category</label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield">
+        <textarea class="mdl-textfield__input" typeof="text" rows="3" id="message" name="message" required></textarea>
+        <label class="mdl-textfield__label" for="message">Message</label>
+    </div>
+
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Submit</button>
+
+</form>

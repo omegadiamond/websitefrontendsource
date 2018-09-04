@@ -15,7 +15,7 @@
     SKU: {{ .Params.reference}}
     <form method="POST" action="#">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" pattern="^[1-9][0-9]*$" id="quantity" value="1">
+            <input class="mdl-textfield__input" type="text" pattern="^[1-9][0-9]*$" id="quantity" value="1" required>
             <label class="mdl-textfield__label" for="quantity">Quantity</label>
             <span class="mdl-textfield__error">Input is not a valid number!</span>
         </div>

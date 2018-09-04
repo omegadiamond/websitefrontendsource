@@ -1,42 +1,56 @@
 {{ partial "header.html" . }}
 
 
+<h1>Products</h1>
+{{ range $index, $element := where .Pages "Section" "products" }}
+<article class="mdl-card mdl-shadow--4dp">
+	<section class="mdl-card__title">
+		<a href="{{ .Permalink }}">
+			<h2 class="mdl-card__title-text">{{ .Title }}</h2>
+		</a>
+	</section>
 
-<h1>All MDs</h1>
+	<section class="mdl-card__media" style="padding: 10px;">
+		<a href="{{ .Permalink }}">
+			<img src="{{ .Site.BaseURL}}/img/card-example.jpg" alt="Card Example">
+		</a>
+	</section>
 
-{{ range where .Pages "Section" "!=" "" }}
-	<article class="mdl-card mdl-shadow--4dp">
-		<div class="mdl-card__title">
-			<a class="mdl-card__title-text" href="{{ .Permalink }}">
-				<h2>{{ .Title }} ({{ .Section }})</h2>
-			</a>
-		</div>
+	<section class="mdl-card__supporting-text">
+		This is description, this is description, this is description, this is description, this is description
+	</section>
 
-		<div class="mdl-card__media" style="padding: 10px;">
-			<a href="{{ .Permalink }}">
-				<img src="{{.Site.BaseURL}}img/card-example.jpg" alt="card example">
-			</a>
-		</div>
+	<!-- actions -->
+	<section class="mdl-card__actions mdl-card--border">
 
-		<!--<div class="mdl-card__supporting-text">
-			This is description, this is description, this is description, this is description, this is description
-		</div>-->
+		<!-- info -->
+		<a class="mdl-button mdl-js-button mdl-button--icon" href="{{ .Permalink }}" title="Information">
+			<i class="material-icons">info</i>
+		</a>
 
-		<div class="mdl-card__actions mdl-card--border">
-			<a class="mdl-button mdl-js-button mdl-button--icon mdl-shadow--2dp" href="#" title="Add to Cart">
-				<i class="material-icons">add_shopping_cart</i>
-			</a>
-		</div>
+		<!-- share -->
+		<button id="product_{{ $index }}"
+				class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"
+				title="Share">
+			<i class="material-icons">share</i>
+		</button>
+		<ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
+			for="product_{{ $index }}">
+			<li class="mdl-menu__item"><a href="#">Facebook</a> </li>
+			<li class="mdl-menu__item"><a href="#">Google +</a> </li>
+			<li class="mdl-menu__item"><a href="#">Link</a> </li>
+		</ul>
 
-		<div class="mdl-card__menu">
-			<a class="mdl-button--icon mdl-js-button mdl-button--icon mdl-js-ripple-effect" href="">
-				<i class="material-icons">info</i>
-			</a>
-		</div>
-	</article>
+		<!-- add to cart -->
+		<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" href="#" title="Add to Cart">
+			<i class="material-icons">add_shopping_cart</i>
+		</a>
+
+		<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" title="Add to Cart">Add to Cart</button>
+	</section>
+</article>
 <br>
 {{ end }}
-
 
 
 {{ partial "footer.html" . }}
