@@ -1,23 +1,23 @@
 <form method="post" action="#">
 
     <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" id="name" name="name" required>
+        <input class="mdl-textfield__input" type="text" id="name" name="name" pattern="[A-Za-z0-9]{1,20}" >
         <label class="mdl-textfield__label" for="name">Name</label>
     </div>
 
     <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="email" id="email" name="email" required>
+        <input class="mdl-textfield__input" type="email" id="email" name="email">
         <label class="mdl-textfield__label" for="email">Email</label>
         <span class="mdl-textfield__error">Invalid Email Address</span>
     </div>
 
     <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" id="subject" name="name" required>
+        <input class="mdl-textfield__input" type="text" id="subject" name="name">
         <label class="mdl-textfield__label" for="subject">Subject</label>
     </div>
 
     <div class="mdl-textfield mdl-js-textfield">
-        <select class="mdl-textfield__input" id="category" name="category" required>
+        <select class="mdl-textfield__input" id="category" name="category">
             <option></option>
             <option value="Product Information">Product Information</option>
             <option value="Product Suggestion">Product Suggestion</option>
@@ -27,10 +27,38 @@
     </div>
 
     <div class="mdl-textfield mdl-js-textfield">
-        <textarea class="mdl-textfield__input" typeof="text" rows="3" id="message" name="message" required></textarea>
+        <textarea class="mdl-textfield__input" typeof="text" rows="3" id="message" name="message"></textarea>
         <label class="mdl-textfield__label" for="message">Message</label>
     </div>
 
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Submit</button>
 
 </form>
+
+<script>
+    MaterialTextfield.prototype.checkValidity = function () {
+        var CLASS_VALIDITY_INIT = "validity-init";
+        if (this.input_ && this.input_.validity && this.input_.validity.valid) {
+            this.element_.classList.remove(this.CssClasses_.IS_INVALID);
+        } else {
+
+            if (this.input_ && this.input_.value.length > 0) {
+                this.element_.classList.add(this.CssClasses_.IS_INVALID);
+            }
+            else if(this.input_ && this.input_.value.length === 0)
+            {
+                if(this.input_.classList.contains(CLASS_VALIDITY_INIT))
+                {
+                    this.element_.classList.add(this.CssClasses_.IS_INVALID);
+                }
+            }
+
+
+        }
+
+        if(this.input_.length && !this.input_.classList.contains(CLASS_VALIDITY_INIT))
+        {
+            this.input_.classList.add(CLASS_VALIDITY_INIT);
+        }
+    };
+</script>
