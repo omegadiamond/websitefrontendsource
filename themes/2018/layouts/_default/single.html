@@ -13,10 +13,11 @@
                 <p>{{ .description }}</p>
             {{ end }}
         </section>-->
-    {{ end }}
+
+
 
     {{/*  Contact  */}}
-    {{ if eq .Title "Contact" }}
+    {{ else if eq .Title "Contact" }}
         {{ partial "contact-form.html" . }}
     {{ end }}
 
