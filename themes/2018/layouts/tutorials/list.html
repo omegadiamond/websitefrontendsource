@@ -7,7 +7,7 @@
 	{{ range where .Pages "Section" "tutorials" }}
 		<article>
 			<a href="{{ .Permalink }}">
-				<img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+				<img src="{{.Site.BaseURL}}img/card-example.jpg" alt="card example">
 				<h2>{{ .Title }}</h2>
 			</a>
 		</article>
@@ -57,7 +57,7 @@
 {{ range where .Pages "Section" "tutorials" }}
     <div class="mdl-card mdl-shadow--4dp mdl-card--horizontal">
         <div class="mdl-card__media">
-            <img src="{{.Site.BaseURL}}/img/card-example.jpg" alt="card example">
+            <img src="{{.Site.BaseURL}}img/card-example.jpg" alt="card example">
         </div>
         <div class="mdl-card__title">
             <a href="{{ .Permalink }}">
