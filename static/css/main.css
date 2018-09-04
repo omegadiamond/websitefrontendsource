@@ -1,17 +1,8 @@
-/* HEADER */
-.omg-search-box.is-focused + .omg-navigation-container{
-    opacity: 0;
-    width: 100px;
-    background-color: red;
-}
-/*.omg-search-box.is-focused {
-    width: calc(100% - 48px);
-}
-.omg-search-box .mdl-textfield__expandable-holder {
-    width: 100%;
-}*/
-
 .omg-navigation > a{
-    padding-left: 10px !important;
-    padding-right: 10px !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
+}
+
+.omg-layout-content{
+    padding: 0 1rem;
 }

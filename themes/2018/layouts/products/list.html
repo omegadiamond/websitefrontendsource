@@ -3,7 +3,7 @@
 
 <h1>Products</h1>
 {{ range $index, $element := where .Pages "Section" "products" }}
-	<article class="mdl-card mdl-shadow--4dp" style="position: relative;">
+	<article class="mdl-card mdl-shadow--4dp">
 		<section class="mdl-card__title">
 			<a href="{{ .Permalink }}">
 				<h2 class="mdl-card__title-text">{{ .Title }}</h2>
@@ -45,6 +45,7 @@
 			<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" href="#" title="Add to Cart">
 				<i class="material-icons">add_shopping_cart</i>
 			</a>
+
 			<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" title="Add to Cart">Add to Cart</button>
 		</section>
 	</article>

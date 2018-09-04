@@ -21,8 +21,7 @@
 <link rel="stylesheet" href="{{.Site.BaseURL}}css/mdl-ext/dialog-polyfill.css">
 
 
-<ul id="lightboard-for-lightbox" class="mdlext-lightboard mdlext-js-lightboard mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events">
-
+<ul id="lightboard-for-lightbox-video" class="mdlext-lightboard mdlext-js-lightboard mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events">
     {{ range $.Scratch.Get "array" }}
 
         <li class="mdlext-lightboard__slide" data-details="[
@@ -37,52 +36,12 @@
             </a>
         </li>
     {{ end }}
-
-
-
-
-    <!--<li class="mdlext-lightboard__slide" data-details="[
-        {'name': 'Title', 'value': 'Video Tutorial 1'},
-        {'name': 'Description', 'value': 'This is video description. This is video description. This is video description. This is video description. '}
-      ]">
-        <a href="https://www.youtube.com/embed/surl_IAIKzA" target="_blank" class="mdlext-lightboard__slide__frame">
-            <figure>
-                <img src="https://img.youtube.com/vi/surl_IAIKzA/0.jpg" title="Video Tutorial 1">
-                <figcaption>Video Tutorial 1</figcaption>
-            </figure>
-        </a>
-    </li>
-
-    <li class="mdlext-lightboard__slide" data-details="[
-        {'name': 'Title', 'value': 'Video Tutorial 2'},
-        {'name': 'Description', 'value': 'This is video description 2. This is video description 222. This is video description. This is video description. '}
-      ]">
-        <a href="https://www.youtube.com/embed/9O5N_QvoEBQ" target="_blank" class="mdlext-lightboard__slide__frame">
-            <figure>
-                <img src="https://img.youtube.com/vi/9O5N_QvoEBQ/0.jpg" title="Video Tutorial 2">
-                <figcaption>Video Tutorial 2</figcaption>
-            </figure>
-        </a>
-    </li>
-
-    <li class="mdlext-lightboard__slide" data-details="[
-        {'name': 'Title', 'value': 'Another Video Tut'},
-        {'name': 'Description', 'value': 'Another Video Tut Description'}
-      ]">
-        <a href="https://www.youtube.com/embed/TgWFKf4XlRw" target="_blank" class="mdlext-lightboard__slide__frame">
-            <figure>
-                <img src="https://img.youtube.com/vi/TgWFKf4XlRw/0.jpg" title="Another Video Tut">
-                <figcaption>Another Video Tut</figcaption>
-            </figure>
-        </a>
-    </li>-->
-
 </ul>
 
 
 <!-- Video Dialog -->
-<dialog id="lightbox-video" class="mdlext-dialog">
-    <div id="lightbox" class="mdlext-lightbox mdlext-js-lightbox mdl-card mdl-shadow--4dp">
+<dialog id="lightbox-dialog-video" class="mdlext-dialog">
+    <div id="lightbox-video" class="mdlext-lightbox mdlext-js-lightbox mdl-card mdl-shadow--4dp">
 
         <div class="mdl-card__menu mdl-color-text--white mdl-typography--body-2-color-contrast">
             <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button" title="Close">
@@ -136,7 +95,7 @@
 
 <script>
     window.addEventListener('load', function() {
-        var dialog = document.querySelector('#lightbox-video');
+        var dialog = document.querySelector('#lightbox-dialog-video');
 
         // A dialog element MUST be a child of document.body!!
         // In a SPA you should choose a more robust strategy than the simple if provided here
@@ -149,7 +108,7 @@
         }
 
         var currentSlide = null;
-        var lightboard = document.querySelector('#lightboard-for-lightbox');
+        var lightboard = document.querySelector('#lightboard-for-lightbox-video');
         var slides = lightboard.querySelectorAll('.mdlext-lightboard__slide');
 
         lightboard.addEventListener('select', function(e) {
