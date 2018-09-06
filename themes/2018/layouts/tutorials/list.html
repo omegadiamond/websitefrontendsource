@@ -1,19 +1,5 @@
 {{ partial "header.html" . }}
 
-<h1>{{ .Title }}</h1>
-
-<!--<section>
-	<h2>Header 1</h2>
-	{{ range where .Pages "Section" "tutorials" }}
-		<article>
-			<a href="{{ .Permalink }}">
-				<img src="{{.Site.BaseURL}}img/card-example.jpg" alt="card example">
-				<h2>{{ .Title }}</h2>
-			</a>
-		</article>
-	{{ end }}
-</section>-->
-
 <style>
     .mdl-card--horizontal{
         width: calc(100% - 32px);
@@ -50,6 +36,12 @@
         }
     }
 </style>
+
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+        <h1>{{ .Title }}</h1>
+    </div>
+</div>
 
 {{ range where .Pages "Section" "tutorials" }}
     <div class="mdl-card mdl-shadow--4dp mdl-card--horizontal">

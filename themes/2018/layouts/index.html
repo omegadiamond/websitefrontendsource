@@ -1,11 +1,16 @@
 {{ partial "header.html" . }}
 
 
-<h1>Products</h1>
+
 
 <!--<style>
 	.mdl-cell{
 		background-color: lightgray;
+	}
+
+	h1{
+		margin: 0;
+		padding: 0;
 	}
 </style>
 
@@ -20,6 +25,10 @@
 
 
 <div class="mdl-grid">
+
+<div class="mdl-cell mdl-cell--12-col">
+	<h1>Products</h1>
+</div>
 
 {{ range $index, $element := where .Pages "Section" "products" }}
 	<div class="mdl-cell">

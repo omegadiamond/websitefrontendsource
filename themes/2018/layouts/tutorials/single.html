@@ -1,7 +1,11 @@
 {{ partial "header.html" . }}
 
-<h1>{{ .Title }} </h1>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+        <h1>{{ .Title }} </h1>
 
-{{ .Content }}
+        {{ .Content }}
+    </div>
+</div>
 
 {{ partial "footer.html" . }}

@@ -1,6 +1,8 @@
 {{ partial "header.html" . }}
 
-<h1>{{ .Title }}</h1>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+        <h1>{{ .Title }}</h1>
 
 <div class="omg-content-cards">
 {{ range (where .Data.Pages "Section" "testimonials").Reverse }}
@@ -23,5 +25,7 @@
 </div>
 
 {{ .Content }}
+    </div>
+</div>
 
 {{ partial "footer.html" . }}

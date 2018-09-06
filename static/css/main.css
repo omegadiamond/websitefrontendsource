@@ -5,8 +5,7 @@ a{
     text-decoration: none;
 }
 
-.mdl-layout {
-}
+
 
 
 .omg-navigation > a{
@@ -18,15 +17,16 @@ a{
 .omg-content-main{
     /*padding: 0 1rem;*/
 }
-.omg-content-main > h1{
-    color: gray;
+.omg-content-main .mdl-grid h1{
     font-size: 3rem;
+    margin: 0;
 }
 
 /* contact form */
 .omg-contact-form{
     margin: 20px auto;
     min-width: 50%;
+    max-width: 100%;
 }
 .omg-contact-form .mdl-textfield{
     width: 100%;
@@ -63,4 +63,9 @@ a{
     flex-direction: column;
     height: 32px;
     color: gray;
+}
+
+/* footer */
+.omg-footer{
+    z-index: 1;
 }
