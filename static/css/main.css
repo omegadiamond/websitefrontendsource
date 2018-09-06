@@ -1,8 +1,66 @@
+img{
+    max-width: 100%;
+}
+a{
+    text-decoration: none;
+}
+
+.mdl-layout {
+}
+
+
 .omg-navigation > a{
     margin: 0 !important;
     padding: 0 12px !important;
 }
 
-.omg-layout-content{
-    padding: 0 1rem;
+/* content: main */
+.omg-content-main{
+    /*padding: 0 1rem;*/
+}
+.omg-content-main > h1{
+    color: gray;
+    font-size: 3rem;
+}
+
+/* contact form */
+.omg-contact-form{
+    margin: 20px auto;
+    min-width: 50%;
+}
+.omg-contact-form .mdl-textfield{
+    width: 100%;
+}
+
+
+/* cards without grid (testimonials) */
+.omg-content-cards{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+.omg-content-cards .mdl-card{
+    margin: 20px 12px;
+}
+
+
+
+
+/* card: product */
+.omg-card-product{
+    width: 100%;
+}
+.omg-card-product .mdl-card__media img{
+    width: 100%;
+}
+.omg-card-product .mdl-card__actions{
+    display: flex;
+    justify-content: space-between;
+}
+.omg-card-price{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 32px;
+    color: gray;
 }

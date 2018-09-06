@@ -19,12 +19,34 @@
 
 <link rel="stylesheet" href="{{.Site.BaseURL}}css/mdl-ext/mdl-ext-eqjs.min.css">
 <link rel="stylesheet" href="{{.Site.BaseURL}}css/mdl-ext/dialog-polyfill.css">
+<style>
+    .mdl-cell{
+        background-color: lightgray;
+    }
+
+    .mdlext-lightboard .mdlext-lightboard__slide {
+        margin: 0;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .mdl-card__title{
+        max-width: 100%;
+        width: 600px;
+    }
+    #lightbox-dialog-video{
+        background-color: lightgoldenrodyellow !important;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+</style>
 
 
-<ul id="lightboard-for-lightbox-video" class="mdlext-lightboard mdlext-js-lightboard mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events">
+<div id="lightboard-for-lightbox-video" class="mdl-grid mdlext-lightboard mdlext-js-lightboard mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events">
     {{ range $.Scratch.Get "array" }}
-
-        <li class="mdlext-lightboard__slide" data-details="[
+    <div class="mdl-cell mdl-cell--3-col-desktop">
+        <div class="mdlext-lightboard__slide" data-details="[
             {'name': 'Title', 'value': '{{ .title }}'},
             {'name': 'Description', 'value': '{{ .description }}'}
           ]">
@@ -34,24 +56,26 @@
                     <figcaption>{{ .title }}</figcaption>
                 </figure>
             </a>
-        </li>
+        </div>
+    </div>
     {{ end }}
-</ul>
+</div>
 
 
 <!-- Video Dialog -->
 <dialog id="lightbox-dialog-video" class="mdlext-dialog">
     <div id="lightbox-video" class="mdlext-lightbox mdlext-js-lightbox mdl-card mdl-shadow--4dp">
 
-        <div class="mdl-card__menu mdl-color-text--white mdl-typography--body-2-color-contrast">
-            <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button" title="Close">
+        <!--<div class="mdl-card__menu mdl-color-text&#45;&#45;white mdl-typography&#45;&#45;body-2-color-contrast">
+            <button data-action="close" class="mdl-button mdl-button&#45;&#45;icon mdl-js-button" title="Close">
                 <i class="material-icons">close</i>
             </button>
-        </div>
+        </div>-->
 
-        <figure class="mdl-card__title" style="display: block; width: 560px;">
+        <figure class="mdl-card__title">
             <!--<iframe width="560" height="315" src="https://www.youtube.com/embed/ChaNUan-SK0?wmode=opaque&amp;rel=0&amp;autohide=1&amp;showinfo=0&amp;wmode=transparent" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/9O5N_QvoEBQ?wmode=opaque&amp;rel=0&amp;autohide=1&amp;showinfo=0&amp;wmode=transparent" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe width="600" height="315" src="https://www.youtube.com/embed/9O5N_QvoEBQ?wmode=opaque&amp;rel=0&amp;autohide=1&amp;showinfo=0&amp;wmode=transparent" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <!--width="560" height="315"-->
             <figcaption data-action="select">Details</figcaption>
         </figure>
         <footer data-action="select" class="mdl-card__actions mdl-card--border">
@@ -59,16 +83,16 @@
                 Image title
             </div>
             <nav>
-                <button data-action="first" class="mdl-button mdl-button--icon mdl-js-button" title="First">
+                <button data-action="first" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored" title="First">
                     <i class="material-icons">first_page</i>
                 </button>
-                <button data-action="prev" class="mdl-button mdl-button--icon mdl-js-button" title="Previous">
+                <button data-action="prev" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored" title="Previous">
                     <i class="material-icons">chevron_left</i>
                 </button>
-                <button data-action="next" class="mdl-button mdl-button--icon mdl-js-button" title="Next">
+                <button data-action="next" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored" title="Next">
                     <i class="material-icons">chevron_right</i>
                 </button>
-                <button data-action="last" class="mdl-button mdl-button--icon mdl-js-button" title="Last">
+                <button data-action="last" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored" title="Last">
                     <i class="material-icons">last_page</i>
                 </button>
 
@@ -76,11 +100,11 @@
                   <i class="material-icons">link</i>
                 </a>-->
 
-                <button data-action="select" class="mdl-button mdl-button--icon mdl-js-button" title="Details">
+                <button data-action="select" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored" title="Details">
                     <i class="material-icons">info_outline</i>
                 </button>
 
-                <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button" title="Close">
+                <button data-action="close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored" title="Close">
                     <i class="material-icons">close</i>
                 </button>
             </nav>

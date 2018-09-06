@@ -1,9 +1,10 @@
+<!--
 {{ partial "header.html" . }}
 
 
 <h1>Products</h1>
 {{ range $index, $element := where .Pages "Section" "products" }}
-	<article class="mdl-card mdl-shadow--4dp">
+	<article class="mdl-card mdl-shadow&#45;&#45;4dp">
 		<section class="mdl-card__title">
 			<a href="{{ .Permalink }}">
 				<h2 class="mdl-card__title-text">{{ .Title }}</h2>
@@ -20,33 +21,33 @@
 			This is description, this is description, this is description, this is description, this is description
 		</section>
 
-		<!-- actions -->
-		<section class="mdl-card__actions mdl-card--border">
+		&lt;!&ndash; actions &ndash;&gt;
+		<section class="mdl-card__actions mdl-card&#45;&#45;border">
 
-			<!-- info -->
-			<a class="mdl-button mdl-js-button mdl-button--icon" href="{{ .Permalink }}" title="Information">
+			&lt;!&ndash; info &ndash;&gt;
+			<a class="mdl-button mdl-js-button mdl-button&#45;&#45;icon" href="{{ .Permalink }}" title="Information">
 				<i class="material-icons">info</i>
 			</a>
 
-			<!-- share -->
+			&lt;!&ndash; share &ndash;&gt;
 			<button id="product_{{ $index }}"
-					class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"
+					class="mdl-button mdl-js-button mdl-button&#45;&#45;icon mdl-js-ripple-effect"
 					title="Share">
 				<i class="material-icons">share</i>
 			</button>
-			<ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
+			<ul class="mdl-menu mdl-menu&#45;&#45;top-left mdl-js-menu mdl-js-ripple-effect"
 					for="product_{{ $index }}">
 				<li class="mdl-menu__item"><a href="#">Facebook</a> </li>
 				<li class="mdl-menu__item"><a href="#">Google +</a> </li>
 				<li class="mdl-menu__item"><a href="#">Link</a> </li>
 			</ul>
 
-			<!-- add to cart -->
-			<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" href="#" title="Add to Cart">
+			&lt;!&ndash; add to cart &ndash;&gt;
+			<a class="mdl-button mdl-js-button mdl-button&#45;&#45;icon mdl-js-ripple-effect" href="#" title="Add to Cart">
 				<i class="material-icons">add_shopping_cart</i>
 			</a>
 
-			<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" title="Add to Cart">Add to Cart</button>
+			<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button&#45;&#45;colored" title="Add to Cart">Add to Cart</button>
 		</section>
 	</article>
 	<br>
@@ -54,3 +55,4 @@
 
 
 {{ partial "footer.html" . }}
+-->

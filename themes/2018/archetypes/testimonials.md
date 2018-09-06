@@ -1,5 +1,7 @@
 ---
 title: {{ replace .File.TranslationBaseName "-" " " | title }}
 date: {{ .Date }}
-draft: true
+draft: false
+author: ---
+youtube_id: 
 ---

@@ -1,6 +1,6 @@
 {{ partial "header.html" . }}
 
-<h1>Tutorial</h1>
+<h1>{{ .Title }}</h1>
 
 <!--<section>
 	<h2>Header 1</h2>
@@ -15,49 +15,48 @@
 </section>-->
 
 <style>
-    .mdl-card{
-        min-height: 0 !important;
-        height: 150px !important;
+    .mdl-card--horizontal{
+        width: calc(100% - 32px);
+        margin: 20px 16px;
     }
-
-   .mdl-card--horizontal {
-       flex-direction: column;
-       padding-left: 150px;
-       width: 100%;
-       height: 150px;
-   }
-
-    .mdl-card__supporting-text {
-        flex: 1 1 auto;
-        width: auto;
-    }
-    .mdl-card__media {
-        flex: 0 auto;
-        float: right;
-        margin: 0;
-        left: 0;
-        position: absolute;
-        width: 150px;
-        background-color: orange;
-    }
-    .mdl-card__media img{
-        height: 150px;
-        width: 150px;
-    }
-    .mdl-card__actions {
-        clear: both;
-    }
-
-    /*.mdl-card__media img{
+    .mdl-card--horizontal img{
         width: 100%;
-    }*/
-</style>
+    }
 
+    @media screen and (min-width: 450px){
+
+        .mdl-card--horizontal {
+            min-height: 150px;
+            flex-direction: column;
+            padding-left: 150px;
+        }
+
+        .mdl-card__supporting-text {
+            flex: 1 1 auto;
+            width: auto;
+        }
+
+        .mdl-card__media {
+            flex: 0 auto;
+            float: right;
+            margin: 0;
+            left: 0;
+            position: absolute;
+            width: 150px;
+            background-color: orange;
+        }
+
+        .mdl-card__media img {
+        }
+    }
+</style>
 
 {{ range where .Pages "Section" "tutorials" }}
     <div class="mdl-card mdl-shadow--4dp mdl-card--horizontal">
         <div class="mdl-card__media">
-            <img src="{{.Site.BaseURL}}img/card-example.jpg" alt="card example">
+            <a href="{{ .Permalink }}">
+                <img src="{{.Site.BaseURL}}img/card-example.jpg" alt="card example">
+            </a>
         </div>
         <div class="mdl-card__title">
             <a href="{{ .Permalink }}">
@@ -66,10 +65,11 @@
         </div>
         <div class="mdl-card__supporting-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Mauris sagittis pellentesque lacus eleifend lacinia...
+            Lorem ipsum dolor sit amet, consectetur adfend lacinia...
+            Lorem ipsum dolor sit amet, consectetur adfend lacinia...
+            Lorem ipsum dolor sit amet, consectetur adfend lacinia...
         </div>
     </div>
-    <br>
 {{ end }}
 
 {{ partial "footer.html" . }}

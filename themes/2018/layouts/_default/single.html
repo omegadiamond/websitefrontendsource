@@ -4,21 +4,4 @@
 
     {{ .Content }}
 
-    {{/*  Videos  */}}
-    {{ if eq .Title "Videos" }}
-        <!--<section>
-            {{ range $.Site.Data.videos.videos }}
-                <h2>{{ .title }}</h2>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ .youtube_id }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                <p>{{ .description }}</p>
-            {{ end }}
-        </section>-->
-
-
-
-    {{/*  Contact  */}}
-    {{ else if eq .Title "Contact" }}
-        {{ partial "contact-form.html" . }}
-    {{ end }}
-
 {{ partial "footer.html" . }}
