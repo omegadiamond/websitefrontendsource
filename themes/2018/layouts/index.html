@@ -15,13 +15,13 @@
 </style>
 
 <div class="mdl-grid">
-	{{ range $i, $sequence :=  (seq 10) }}
+	{{ range $i, $sequence := (seq 12) }}
 	<div class="mdl-cell ">
 		{{ $i }}: {{ $sequence }}
 	</div>
 	{{ end }}
-</div>-->
 
+</div>-->
 
 
 <div class="mdl-grid">
@@ -29,6 +29,136 @@
 <div class="mdl-cell mdl-cell--12-col">
 	<h1>Products</h1>
 </div>
+
+{{ range $index, $element := where .Pages "Section" "products" }}
+	<div class="mdl-cell">
+		<article class="mdl-card mdl-shadow--4dp omg-card-product">
+			<section class="mdl-card__title">
+				<a href="{{ .Permalink }}">
+					<h2 class="mdl-card__title-text">{{ .Title }}</h2>
+				</a>
+			</section>
+
+			<section class="mdl-card__media">
+				<a href="{{ .Permalink }}">
+					<img src="{{ .Site.BaseURL}}/img/card-example.jpg" alt="Card Example">
+				</a>
+			</section>
+
+			<section class="mdl-card__supporting-text">
+				This is description, this is description, this is description, this is description, this is description
+			</section>
+
+			<!-- actions -->
+			<section class="mdl-card__actions mdl-card--border">
+
+				<strong class="omg-card-price">$4,321.00</strong>
+
+				<div>
+					<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--accent" id="share_{{ $index }}" title="Share">
+						<i class="material-icons">share</i>
+					</button>
+					<ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect"
+						for="share_{{ $index }}">
+						<li class="mdl-menu__item"><a href="#">Facebook</a> </li>
+						<li class="mdl-menu__item"><a href="#">Google +</a> </li>
+						<li class="mdl-menu__item"><a href="#">Copy Link</a> </li>
+					</ul>
+					<div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="share_{{ $index }}">Share</div>
+
+					<!-- add to cart -->
+					<a id="add_{{ $index }}" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-button--accent" href="#" title="Add to Cart">
+						<i class="material-icons">add_shopping_cart</i>
+					</a>
+					<div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="add_{{ $index }}">Add to Cart</div>
+					<!--<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button&#45;&#45;raised mdl-button&#45;&#45;accent" title="Add to Cart">Add to Cart</button>-->
+				</div>
+			</section>
+
+			<!-- menu -->
+			<!--<div class="mdl-card__menu">
+				<button class="mdl-button mdl-button&#45;&#45;icon mdl-js-button mdl-js-ripple-effect" id="product_{{ $index }}">
+					<i class="material-icons">share</i>
+				</button>
+				<ul class="mdl-menu mdl-menu&#45;&#45;bottom-right mdl-js-menu mdl-js-ripple-effect"
+					for="product_{{ $index }}">
+					<li class="mdl-menu__item"><a href="#">Facebook</a> </li>
+					<li class="mdl-menu__item"><a href="#">Google +</a> </li>
+					<li class="mdl-menu__item"><a href="#">Link</a> </li>
+				</ul>
+			</div>-->
+		</article>
+	</div>
+{{ end }}
+
+
+
+{{ range $index, $element := where .Pages "Section" "products" }}
+	<div class="mdl-cell">
+		<article class="mdl-card mdl-shadow--4dp omg-card-product">
+			<section class="mdl-card__title">
+				<a href="{{ .Permalink }}">
+					<h2 class="mdl-card__title-text">{{ .Title }}</h2>
+				</a>
+			</section>
+
+			<section class="mdl-card__media">
+				<a href="{{ .Permalink }}">
+					<img src="{{ .Site.BaseURL}}/img/card-example.jpg" alt="Card Example">
+				</a>
+			</section>
+
+			<section class="mdl-card__supporting-text">
+				This is description, this is description, this is description, this is description, this is description
+			</section>
+
+			<!-- actions -->
+			<section class="mdl-card__actions mdl-card--border">
+
+				<strong class="omg-card-price">$4,321.00</strong>
+
+				<div>
+					<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--accent" id="share_{{ $index }}" title="Share">
+						<i class="material-icons">share</i>
+					</button>
+					<ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect"
+						for="share_{{ $index }}">
+						<li class="mdl-menu__item"><a href="#">Facebook</a> </li>
+						<li class="mdl-menu__item"><a href="#">Google +</a> </li>
+						<li class="mdl-menu__item"><a href="#">Copy Link</a> </li>
+					</ul>
+					<div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="share_{{ $index }}">Share</div>
+
+					<!-- add to cart -->
+					<a id="add_{{ $index }}" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-button--accent" href="#" title="Add to Cart">
+						<i class="material-icons">add_shopping_cart</i>
+					</a>
+					<div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="add_{{ $index }}">Add to Cart</div>
+					<!--<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button&#45;&#45;raised mdl-button&#45;&#45;accent" title="Add to Cart">Add to Cart</button>-->
+				</div>
+			</section>
+
+			<!-- menu -->
+			<!--<div class="mdl-card__menu">
+				<button class="mdl-button mdl-button&#45;&#45;icon mdl-js-button mdl-js-ripple-effect" id="product_{{ $index }}">
+					<i class="material-icons">share</i>
+				</button>
+				<ul class="mdl-menu mdl-menu&#45;&#45;bottom-right mdl-js-menu mdl-js-ripple-effect"
+					for="product_{{ $index }}">
+					<li class="mdl-menu__item"><a href="#">Facebook</a> </li>
+					<li class="mdl-menu__item"><a href="#">Google +</a> </li>
+					<li class="mdl-menu__item"><a href="#">Link</a> </li>
+				</ul>
+			</div>-->
+		</article>
+	</div>
+{{ end }}
+
+
+
+
+
+
 
 {{ range $index, $element := where .Pages "Section" "products" }}
 	<div class="mdl-cell">

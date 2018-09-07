@@ -1,67 +1,69 @@
 {{ partial "header.html" . }}
 
 <style>
-    .mdl-card--horizontal{
-        width: calc(100% - 32px);
-        margin: 20px 16px;
-    }
-    .mdl-card--horizontal img{
-        width: 100%;
-    }
 
-    @media screen and (min-width: 450px){
-
-        .mdl-card--horizontal {
-            min-height: 150px;
-            flex-direction: column;
-            padding-left: 150px;
-        }
-
-        .mdl-card__supporting-text {
-            flex: 1 1 auto;
-            width: auto;
-        }
-
-        .mdl-card__media {
-            flex: 0 auto;
-            float: right;
-            margin: 0;
-            left: 0;
-            position: absolute;
-            width: 150px;
-            background-color: orange;
-        }
-
-        .mdl-card__media img {
-        }
-    }
 </style>
 
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--12-col">
         <h1>{{ .Title }}</h1>
+
+        {{/* LIST */}}
+        {{ if eq .Title "Tutorials" }}
+            {{ range .Sections  }}
+                <div class="mdl-card mdl-shadow--4dp omg-card-tutorial">
+                    <div class="mdl-card__media">
+                        <a href="{{ .Permalink }}">
+                            <img src="{{.Site.BaseURL}}img/card-example.jpg" alt="card example">
+                        </a>
+                    </div>
+                    <div class="mdl-card__title">
+                        <a href="{{ .Permalink }}">
+                            <h2 class="mdl-card__title-text">{{ .Title }}</h2>
+                        </a>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        {{ .Description }}
+                    </div>
+                </div>
+            {{ end }}
+
+
+        {{/* SINGLE  */}}
+        {{ else }}
+
+            {{ .Description }}
+
+            {{ if .Params.tools }}
+                <h2>Tools you will need</h2>
+                <ul>
+                    {{ range .Params.tools }}
+                        <li>{{ . }}</li>
+                    {{ end }}
+                </ul>
+            {{ end }}
+
+            {{ range $index, $element := sort .Pages ".File.BaseFileName" }}
+                <h3>
+                    <strong>Step {{ add $index 1 }}</strong>
+                    <span>{{ .Title }}</span>
+                </h3>
+
+                {{ range .Params.media }}
+                    {{ if eq .service "youtube" }}
+                        <iframe width="400" height="315" src="https://www.youtube.com/embed/{{ .value }}?wmode=opaque&amp;rel=0&amp;autohide=1&amp;showinfo=0&amp;wmode=transparent" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    {{ else if or (eq .service "image") (eq .service "img") }}
+                        <img src="{{ .value }}" title="{{ $.Title }}">
+                    {{ end }}
+                {{ end }}
+
+                {{ .Content }}
+            {{ end }}
+
+            {{ .Content }}
+        {{ end }}
+
     </div>
 </div>
-
-{{ range where .Pages "Section" "tutorials" }}
-    <div class="mdl-card mdl-shadow--4dp mdl-card--horizontal">
-        <div class="mdl-card__media">
-            <a href="{{ .Permalink }}">
-                <img src="{{.Site.BaseURL}}img/card-example.jpg" alt="card example">
-            </a>
-        </div>
-        <div class="mdl-card__title">
-            <a href="{{ .Permalink }}">
-                <h2 class="mdl-card__title-text">{{ .Title }}</h2>
-            </a>
-        </div>
-        <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Lorem ipsum dolor sit amet, consectetur adfend lacinia...
-            Lorem ipsum dolor sit amet, consectetur adfend lacinia...
-            Lorem ipsum dolor sit amet, consectetur adfend lacinia...
-        </div>
-    </div>
-{{ end }}
 
 {{ partial "footer.html" . }}

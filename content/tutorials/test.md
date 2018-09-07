@@ -9,29 +9,30 @@ draft: true
 * [Flat table](#)
 * [Light-weight cord](#)
 
+
 ## Introduction
 In some environments static electricity can push the string away from the rail, so it is critical that you wrap around and have string on both sides of a single rail bar and check the difference in the gap: if both sides show the same amount of gap, no matter how much that gap actually is, the rail is straight.
 
-## Step 1
+### Step 1
 ![How to...](/img/tutorial.jpg)
-![how to...](/img/card-example.jpg)
-![how to...](/img/card-example.jpg)
 
 * Set the ends of the rail on 4x4 wood blocks with the bend set curved up in the middle.
 
-## Step 2
+### Step 2
 ![How to...](/img/tutorial.jpg)
+![how to...](/img/card-example.jpg)
+![how to...](/img/card-example.jpg)
 
 * (If the aluminum angle is facing down, set the rail so that the edge of the angle aluminum hangs off the edge of the wood block.)
 
-## Step 3
+### Step 3
 ![How to...](/img/tutorial.jpg)
 ![how to...](/img/card-example.jpg)
 ![how to...](/img/card-example.jpg)
 
 * Make sure both ends are stable on the blocks.
 
-## Step 4
+### Step 4
 ![How to...](/img/tutorial.jpg)
 
 * Using some sort of support to hold yourself steady, step down on the rail providing just enough force to bend the rail straight.

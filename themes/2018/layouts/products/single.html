@@ -8,16 +8,18 @@
 
     <div class="mdl-cell mdl-cell--12-col">
 
-        <div>
-            Price: $4,321.00
-            SKU: {{ .Params.reference}}
+        <div class="omg-product-form">
+            <div class="omg-product-form-details">
+                <div>Price: $4,321.00</div>
+                <div>SKU: {{ .Params.reference}}</div>
+            </div>
+
             <form method="POST" action="#">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield&#45;&#45;floating-label">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" pattern="^[1-9][0-9]*$" id="quantity" value="1" required>
                     <label class="mdl-textfield__label" for="quantity">Quantity</label>
                     <span class="mdl-textfield__error">Input is not a valid number!</span>
-                </div>
-                <input class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;colored" type="submit" value="Add to Cart">
+                </div><input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Add to Cart">
             </form>
         </div>
 
@@ -49,9 +51,7 @@
                 <section>
                     <h2>Related Products</h2>
 
-                    <div class="omg-content-cards">
-                        {{ partial "related-products-test.html" . }}
-                    </div>
+                    {{ partial "related-products-test.html" . }}
                 </section>
             </div>
 

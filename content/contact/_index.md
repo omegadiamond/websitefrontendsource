@@ -2,6 +2,7 @@
 title: Contact
 date: 2018-09-05T11:06:48-07:00
 draft: true
+includeHead: "<script src='https://www.google.com/recaptcha/api.js'></script>"
 # Used for general website pages - eg. About Us, Warranty, etc.
 ---
 

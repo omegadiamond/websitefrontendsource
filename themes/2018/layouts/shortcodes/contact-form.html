@@ -1,36 +1,46 @@
-<form method="post" action="#" class="mdl-card omg-contact-form">
-
-    <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" id="name" name="name" pattern="[A-Za-z0-9]{1,20}" >
-        <label class="mdl-textfield__label" for="name">Name</label>
+<form method="post" action="#" class="mdl-card mdl-shadow--2dp omg-card-contact">
+    <div class="mdl-card__title">
+        <h2>Contact Form</h2>
     </div>
+    <div class="mdl-card__supporting-text">
 
-    <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="email" id="email" name="email">
-        <label class="mdl-textfield__label" for="email">Email</label>
-        <span class="mdl-textfield__error">Invalid Email Address</span>
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="name" name="name" pattern="[A-Za-z0-9]{1,20}" >
+            <label class="mdl-textfield__label" for="name">Name</label>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="email" id="email" name="email">
+            <label class="mdl-textfield__label" for="email">Email</label>
+            <span class="mdl-textfield__error">Invalid Email Address</span>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="subject" name="name">
+            <label class="mdl-textfield__label" for="subject">Subject</label>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield">
+            <select class="mdl-textfield__input" id="category" name="category">
+                <option></option>
+                <option value="Product Information">Product Information</option>
+                <option value="Product Suggestion">Product Suggestion</option>
+                <option value="Website Feedback">Website Feedback</option>
+            </select>
+            <label class="mdl-textfield__label" for="category">Category</label>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield">
+            <textarea class="mdl-textfield__input" typeof="text" rows="3" id="message" name="message"></textarea>
+            <label class="mdl-textfield__label" for="message">Message</label>
+        </div>
+
+        <button class="g-recaptcha mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
+                data-sitekey="6LdE3G4UAAAAAIaHHAZOYCWkg6pYmOM1js6cBKx6"
+                data-callback="YourOnSubmitFn"
+                type="submit">Submit</button> <!-- ToDo: change data-callback-->
     </div>
-
-    <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" id="subject" name="name">
-        <label class="mdl-textfield__label" for="subject">Subject</label>
-    </div>
-
-    <div class="mdl-textfield mdl-js-textfield">
-        <select class="mdl-textfield__input" id="category" name="category">
-            <option></option>
-            <option value="Product Information">Product Information</option>
-            <option value="Product Suggestion">Product Suggestion</option>
-            <option value="Website Feedback">Website Feedback</option>
-        </select>
-        <label class="mdl-textfield__label" for="category">Category</label>
-    </div>
-
-    <div class="mdl-textfield mdl-js-textfield">
-        <textarea class="mdl-textfield__input" typeof="text" rows="3" id="message" name="message"></textarea>
-        <label class="mdl-textfield__label" for="message">Message</label>
-    </div>
-
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Submit</button>
 
 </form>
+
+

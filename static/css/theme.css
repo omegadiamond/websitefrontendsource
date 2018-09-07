@@ -1,0 +1,17 @@
+img{
+    max-width: 100%;
+}
+a{
+    text-decoration: none;
+}
+
+.mdl-grid{
+    max-width: 1100px;
+}
+
+/* h1 */
+.omg-content-main .mdl-grid h1{
+    font-size: 3rem;
+    margin: 0;
+    /*color: gray;*/
+}

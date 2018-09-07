@@ -1,54 +1,115 @@
-img{
+html, body{
+    width: 100%;
     max-width: 100%;
 }
-a{
-    text-decoration: none;
-}
 
-
-
-
+/* NAV */
 .omg-navigation > a{
     margin: 0 !important;
-    padding: 0 12px !important;
+    padding: 0 10px !important;
 }
 
-/* content: main */
-.omg-content-main{
-    /*padding: 0 1rem;*/
+
+/* SEARCH form */
+.omg-search-form.is-focused input, .omg-search-form.is-dirty input {
+    width: 100px;
 }
-.omg-content-main .mdl-grid h1{
-    font-size: 3rem;
-    margin: 0;
+@media screen and (min-width: 450px){
+    .omg-search-form.is-focused input {
+        width: 150px;
+    }
 }
+@media screen and (min-width: 1020px) and (max-width: 1150px){
+    .omg-navigation{
+        position: absolute;
+        right: 115px;
+    }
+    .omg-search-form .mdl-textfield__expandable-holder input{
+        width: 0;
+    }
+    .omg-search-form.is-focused{
+        right: 80px;
+        position: absolute;
+        z-index: 5;
+        top: 0;
+        height: 64px;
+        /*background: rgba(116,145,159, .9);*/
+        background: rgba(91,120,134, .9);
+        width: 200px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .omg-search-form.is-focused input{
+        width: 100%;
+    }
+}
+
 
 /* contact form */
-.omg-contact-form{
-    margin: 20px auto;
-    min-width: 50%;
+.omg-card-contact{
+    margin: 0 auto;
+    width: 600px;
     max-width: 100%;
 }
-.omg-contact-form .mdl-textfield{
+.omg-card-contact .mdl-textfield{
+    width: 100%;
+}
+.omg-card-contact .mdl-button{
     width: 100%;
 }
 
 
-/* cards without grid (testimonials) */
-.omg-content-cards{
+/* TESTIMONIALS cards */
+.omg-testimonials-cards{
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
 }
-.omg-content-cards .mdl-card{
-    margin: 20px 12px;
+.omg-testimonials-cards .mdl-card{
+    margin: 10px 0;
+}
+@media screen and (min-width: 450px){
+    .omg-testimonials-cards .mdl-card{
+        margin: 20px 6px;
+    }
 }
 
 
+/* TUTORIAL card */
+.omg-card-tutorial{
+    width: 100%;
+    margin: 20px 0;
+}
+.omg-card-tutorial img{
+    width: 100%;
+}
+.omg-card-tutorial .mdl-card__title{
+    padding-bottom: 0 !important;
+}
+@media screen and (min-width: 450px){
+    .omg-card-tutorial {
+        min-height: 150px;
+        flex-direction: column;
+        padding-left: 150px;
+    }
+    .omg-card-tutorial .mdl-card__supporting-text {
+        flex: 1 1 auto;
+        width: auto;
+    }
+    .omg-card-tutorial .mdl-card__media {
+        left: 0;
+        position: absolute;
+        width: 150px;
+    }
+}
 
 
-/* card: product */
+/* PRODUCT card */
 .omg-card-product{
     width: 100%;
+}
+.omg-card-product .mdl-card__media{
+    background-color: transparent;
 }
 .omg-card-product .mdl-card__media img{
     width: 100%;
@@ -61,11 +122,61 @@ a{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 32px;
-    color: gray;
+    height: 32px;+
 }
 
-/* footer */
+/* PRODUCT single */
+.omg-product-form{
+    margin-bottom: 15px;
+}
+.omg-product-form-details div{
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+    padding: 3px 0;
+}
+.omg-product-form form .mdl-textfield{
+    width: calc(50% - 5px);
+    margin-right: 5px;
+}
+@media screen and (max-width: 449px){
+    .omg-product-form form .mdl-button{
+        width: 50%;
+    }
+}
+@media screen and (min-width: 450px){
+    .omg-product-form{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .omg-product-form-details div{
+        display: block;
+    }
+    .omg-product-form form .mdl-textfield{
+        width: 50px;
+        margin-right: 10px;
+    }
+}
+
+
+/* TUTORIAL single */
+/*.omg-page-tutorial img{
+    width: 100%;
+}*/
+/*@media screen and (min-width: 450px){
+    .omg-page-tutorial img{
+        width: 50%;
+    }
+}*/
+
+
+/* FOOTER */
 .omg-footer{
     z-index: 1;
+    overflow: hidden;
 }
+
+
+

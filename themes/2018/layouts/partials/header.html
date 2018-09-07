@@ -26,8 +26,10 @@
     <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">-->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-orange.min.css" />
-    <link rel="stylesheet" href="../../../../static/css/material.min.css"> <!-- ToDo: delete before production-->
     <link rel="stylesheet" href="{{.Site.BaseURL}}css/main.css">
+    <link rel="stylesheet" href="{{.Site.BaseURL}}css/theme.css">
+
+    {{ if .Params.includeHead }} {{ .Params.includeHead | safeHTML }} {{ end }}
 </head>
 <body>
 
@@ -46,7 +48,7 @@
             <div class="mdl-layout-spacer"></div>
 
             <!-- nav -->
-            <nav class="omg-navigation mdl-navigation mdl-layout--large-screen-only">
+            <nav class="mdl-navigation mdl-layout--large-screen-only omg-navigation">
                 <a class="mdl-navigation__link" href="{{.Site.BaseURL}}">PRODUCTS</a>
                 <a class="mdl-navigation__link" href="{{.Site.BaseURL}}tutorials">TUTORIALS</a>
                 <a class="mdl-navigation__link" href="{{.Site.BaseURL}}testimonials">TESTIMONIALS</a>
@@ -58,7 +60,8 @@
             </nav>
 
             <!-- search -->
-            <form action="#" method="GET" class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+            <!-- class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right" -->
+            <form action="#" method="GET" class="mdl-textfield mdl-js-textfield mdl-textfield--expandable omg-search-form">
                 <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
                     <i class="material-icons">search</i>
                 </label>
@@ -68,10 +71,9 @@
             </form>
 
             <!-- shopping cart -->
-            <a href="#" class="mdl-button mdl-js-button mdl-button--icon" style="overflow: visible;">
+            <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon omg-cart" style="overflow: visible;">
                 <i class="material-icons mdl-badge mdl-badge--overlap" data-badge="5">shopping_cart</i>
             </a>
-        </div>
     </header>
 
     <!-- Drawer -->

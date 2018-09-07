@@ -189,24 +189,26 @@
             href = slideAnchor.getAttribute('href');
             iframe.setAttribute('data-img-url-next', href);
 
-            // details
-            var detailsHtml  = '';
-            var detailsArray = JSON.parse(slide.getAttribute('data-details').replace(/'/g, '"'));
 
-            if(detailsArray != null) {
-                detailsHtml = '<table><tbody>';
-                for (var i = 0, n = detailsArray.length; i < n; i++) {
-                    detailsHtml += '<tr><th>' + detailsArray[i].name + '</th><td>' + detailsArray[i].value + '</td></tr>';
+            // details if exist
+            if(slide.getAttribute('data-details') != null) {
+                var detailsHtml  = '';
+                var detailsArray = JSON.parse(slide.getAttribute('data-details').replace(/'/g, '"'));
+                if (detailsArray != null) {
+                    detailsHtml = '<table><tbody>';
+                    for (var i = 0, n = detailsArray.length; i < n; i++) {
+                        detailsHtml += '<tr><th>' + detailsArray[i].name + '</th><td>' + detailsArray[i].value + '</td></tr>';
 
-                    if(!supportingText.innerHTML && detailsArray[i].name.toLowerCase() === 'title') {
-                        supportingText.innerHTML = detailsArray[i].value;
+                        if (!supportingText.innerHTML && detailsArray[i].name.toLowerCase() === 'title') {
+                            supportingText.innerHTML = detailsArray[i].value;
+                        }
                     }
+                    detailsHtml += '</tbody></table>';
                 }
-                detailsHtml += '</tbody></table>';
-            }
 
-            imageDetails.innerHTML = '';
-            imageDetails.insertAdjacentHTML('afterbegin', detailsHtml);
+                imageDetails.innerHTML = '';
+                imageDetails.insertAdjacentHTML('afterbegin', detailsHtml);
+            }
 
             if(!dialog.open){
                 dialog.showModal();
