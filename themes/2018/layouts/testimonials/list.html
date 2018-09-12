@@ -4,27 +4,32 @@
     <div class="mdl-cell mdl-cell--12-col">
         <h1>{{ .Title }}</h1>
 
-<div class="omg-testimonials-cards">
-{{ range (where .Data.Pages "Section" "testimonials").Reverse }}
-    <div class="mdl-card mdl-shadow--4dp">
-        <div class="mdl-card__media" style="background-color: transparent; text-align: center; padding-top: 22px; padding-bottom: 4px;">
-            <img src="{{.Site.BaseURL}}img/testimonial-quotes.png" width="50">
+        <div class="omg-testimonials-cards">
+        {{ range (where .Data.Pages "Section" "testimonials").Reverse }}
+            <div class="mdl-card mdl-shadow--4dp">
+                <div class="mdl-card__media">
+                    <img src="{{.Site.BaseURL}}img/testimonial-quotes.png">
+                </div>
+
+                <div class="mdl-card__supporting-text">
+                    {{ .Content }}
+
+                    {{ if .Params.youtube_id }}
+                        <iframe width="100" height="200" src="https://www.youtube.com/embed/{{ .Params.youtube_id }}?wmode=opaque&amp;rel=0&amp;autohide=1&amp;showinfo=0&amp;wmode=transparent" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    {{ end }}
+
+                    <blockquote>{{ .Params.author }}</blockquote>
+                </div>
+            </div>
+        {{ end }}
         </div>
 
-        <div class="mdl-card__supporting-text">
-            {{ .Content }}
-
-            {{ if .Params.youtube_id }}
-                <iframe width="100" height="200" src="https://www.youtube.com/embed/{{ .Params.youtube_id }}?wmode=opaque&amp;rel=0&amp;autohide=1&amp;showinfo=0&amp;wmode=transparent" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            {{ end }}
-
-            <blockquote>{{ .Params.author }}</blockquote>
+        <div class="mdl-card mdl-shadow--4dp omg-testimonials-text">
+            <div class="mdl-card__supporting-text">
+                {{ .Content }}
+            </div>
         </div>
-    </div>
-{{ end }}
-</div>
 
-{{ .Content }}
     </div>
 </div>
 

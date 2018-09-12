@@ -8,20 +8,49 @@
 
     <div class="mdl-cell mdl-cell--12-col">
 
-        <div class="omg-product-form">
-            <div class="omg-product-form-details">
+        <style>
+            .omg-product-form{
+                width: 100%;
+                min-height: 0;
+                margin-bottom: 20px;
+            }
+            .omg-product-form .mdl-card__media{
+                background-color: transparent;
+                padding: 10px 20px;
+            }
+        </style>
+
+        <div class="mdl-card mdl-shadow--2dp omg-product-form">
+            <div class="mdl-card__media">
+                <div class="omg-product-form-details">
+                    <div>Price: $4,321.00</div>
+                    <div>SKU: {{ .Params.reference}}</div>
+                </div>
+
+                <form method="POST" action="#">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" pattern="^[1-9][0-9]*$" id="quantity" value="1" required>
+                        <label class="mdl-textfield__label" for="quantity">Quantity</label>
+                        <span class="mdl-textfield__error">Input is not a valid number!</span>
+                    </div><input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Add to Cart">
+                </form>
+            </div>
+        </div>
+
+        <!--<div class="omg-something">
+            <div class="omg-something-details">
                 <div>Price: $4,321.00</div>
                 <div>SKU: {{ .Params.reference}}</div>
             </div>
 
             <form method="POST" action="#">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield&#45;&#45;floating-label">
                     <input class="mdl-textfield__input" type="text" pattern="^[1-9][0-9]*$" id="quantity" value="1" required>
                     <label class="mdl-textfield__label" for="quantity">Quantity</label>
                     <span class="mdl-textfield__error">Input is not a valid number!</span>
-                </div><input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Add to Cart">
+                </div><input class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect mdl-button&#45;&#45;accent" type="submit" value="Add to Cart">
             </form>
-        </div>
+        </div>-->
 
         <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
             <div class="mdl-tabs__tab-bar">

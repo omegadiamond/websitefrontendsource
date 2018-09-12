@@ -1,0 +1,36 @@
+{{ partial "header.html" . }}
+
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+        <h1>{{ .Title }}</h1>
+
+        <h2>Tutorial list</h2>
+        {{ .Content }}
+
+        {{ range .Sections  }}
+            <div class="mdl-card mdl-shadow--4dp omg-card-tutorial" {{ if not .Params.image }} style="padding-left: 0;" {{ end }}>
+
+                <!-- image -->
+                {{ if .Params.image }}
+                <div class="mdl-card__media">
+                    <a href="{{ .Permalink }}">
+                        <img src="{{ .Params.image}}" alt="{{ .Title }}">
+                    </a>
+                </div>
+                {{ end }}
+
+                <div class="mdl-card__title">
+                    <a href="{{ .Permalink }}">
+                        <h2 class="mdl-card__title-text">{{ .Title }}</h2>
+                    </a>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    {{ .Description }}
+                </div>
+            </div>
+        {{ end }}
+
+    </div>
+</div>
+
+{{ partial "footer.html" . }}

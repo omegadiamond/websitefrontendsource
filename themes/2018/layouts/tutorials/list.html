@@ -1,6 +1,56 @@
 {{ partial "header.html" . }}
 
 <style>
+    .omg-tut-step{
+        margin-bottom: 40px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #bbb;
+    }
+    .omg-tut-step > input[type='radio']{
+        display: none;
+    }
+    .omg-tut-box{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .omg-tut-content{
+    }
+    .omg-tut-box img, .omg-tut-box iframe{
+        width: 100%;
+        display: none;
+    }
+
+    .omg-tut-thumbs img {
+        max-height: 60px;
+        max-width: 50%;
+        display: inline-block;
+        margin: 2px;
+        opacity: 0.6;
+        border: 1px solid #bbb;
+        border-radius: 3px;
+        -webkit-transition: all .3s ease-out;
+        -moz-transition: all .3s ease-out;
+        -ms-transition: all .3s ease-out;
+        -o-transition: all .3s ease-out;
+        transition: all .3s ease-out;
+    }
+
+    @media screen and (min-width: 980px){
+        .omg-tut-step{
+            display: flex;
+        }
+        .omg-tut-box{
+            width: 50%;
+            margin-bottom: 0;
+            margin-right: 10px;
+        }
+        .omg-tut-content{
+            width: 50%;
+        }
+        .omg-tut-thumbs img{
+            max-height: 70px;
+        }
+    }
 
 </style>
 
@@ -8,60 +58,135 @@
     <div class="mdl-cell mdl-cell--12-col">
         <h1>{{ .Title }}</h1>
 
-        {{/* LIST */}}
-        {{ if eq .Title "Tutorials" }}
-            {{ range .Sections  }}
-                <div class="mdl-card mdl-shadow--4dp omg-card-tutorial">
-                    <div class="mdl-card__media">
-                        <a href="{{ .Permalink }}">
-                            <img src="{{.Site.BaseURL}}img/card-example.jpg" alt="card example">
-                        </a>
-                    </div>
-                    <div class="mdl-card__title">
-                        <a href="{{ .Permalink }}">
-                            <h2 class="mdl-card__title-text">{{ .Title }}</h2>
-                        </a>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        {{ .Description }}
-                    </div>
-                </div>
-            {{ end }}
 
 
-        {{/* SINGLE  */}}
-        {{ else }}
+        {{ .Description }}
 
-            {{ .Description }}
+        {{ if .Params.tools }}
+            <h2>Tools you will need</h2>
+            <ul>
+                {{ range .Params.tools }}
+                    <li>{{ . }}</li>
+                {{ end }}
+            </ul>
+        {{ end }}
 
-            {{ if .Params.tools }}
-                <h2>Tools you will need</h2>
-                <ul>
-                    {{ range .Params.tools }}
-                        <li>{{ . }}</li>
-                    {{ end }}
-                </ul>
-            {{ end }}
+        {{/* STEPS */}}
+        {{ range $index, $element := sort .Pages ".File.BaseFileName" }}
 
-            {{ range $index, $element := sort .Pages ".File.BaseFileName" }}
-                <h3>
-                    <strong>Step {{ add $index 1 }}</strong>
-                    <span>{{ .Title }}</span>
-                </h3>
+            <style>
+                {{ range $mindex, $media := .Params.media }}
+                    #radio_{{ $index }}{{ $mindex }}:checked ~ .omg-tut-box #media_{{ $index }}{{ $mindex }} {
+                        display: inline-block;
+                    }
+                    #radio_{{ $index }}{{ $mindex }}:checked ~ .omg-tut-content .omg-tut-thumbs #label_{{ $index }}{{ $mindex }} img{
+                        opacity: 1;
+                         -webkit-box-shadow: 3px 3px 32px -2px rgba(0,0,0,0.67);
+                         -moz-box-shadow: 3px 3px 32px -2px rgba(0,0,0,0.67);
+                         box-shadow: 3px 3px 32px -2px rgba(0,0,0,0.67);
+                    }
+                {{ end }}
+            </style>
 
-                {{ range .Params.media }}
-                    {{ if eq .service "youtube" }}
-                        <iframe width="400" height="315" src="https://www.youtube.com/embed/{{ .value }}?wmode=opaque&amp;rel=0&amp;autohide=1&amp;showinfo=0&amp;wmode=transparent" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    {{ else if or (eq .service "image") (eq .service "img") }}
-                        <img src="{{ .value }}" title="{{ $.Title }}">
-                    {{ end }}
+            <h3>
+                <strong>Step {{ add $index 1 }}</strong>
+                <span>{{ .Title }}</span>
+            </h3>
+
+            <div class="omg-tut-step">
+
+                <!-- radio buttons -->
+                {{ range $mindex, $media := .Params.media }}
+                    <input type="radio" id="radio_{{ $index }}{{ $mindex }}" name="step_{{ $index }}" {{ if eq $mindex 0}} checked {{ end }}>
                 {{ end }}
 
-                {{ .Content }}
-            {{ end }}
+                <!-- box -->
+                {{ if .Params.media }}
+                <div class="omg-tut-box">
+                    {{ range $mindex, $media := .Params.media }}
+                        {{ if eq .service "youtube" }}
+                            <iframe id="media_{{ $index }}{{ $mindex }}" width="640" height="360" src="http://www.youtube.com/embed/{{ .value }}?enablejsapi=1&version=3&playerapiid=ytplayer&showinfo=0&rel=0" frameborder="0" allowfullscreen="true" allowscriptaccess="always"></iframe>
+                        {{ else if or (eq .service "image") (eq .service "img") }}
+                            <img id="media_{{ $index }}{{ $mindex }}" src="{{ .value }}" alt="{{ $.Title }}">
+                        {{ end }}
 
-            {{ .Content }}
+                    {{ end }}
+                </div>
+                {{ end }}
+
+                <!-- thumbs && content -->
+                <div class="omg-tut-content" {{ if not .Params.media }} style="width: 100%" {{ end }}>
+
+                    {{ if .Params.media }} {{ if gt (len .Params.media) 1 }}
+                    <div class="omg-tut-thumbs">
+                        {{ range $mindex, $media := .Params.media }}
+
+                            <label id="label_{{ $index }}{{ $mindex }}" for="radio_{{ $index }}{{ $mindex }}">
+                                {{ if eq .service "youtube" }}
+                                    <img src="https://img.youtube.com/vi/{{ .value }}/0.jpg" alt="">
+                                {{ else if or (eq .service "image") (eq .service "img") }}
+                                    <img src="{{ .value }}" alt="{{ $.Title }}">
+                                {{ end }}
+                            </label>
+
+                        {{ end }}
+                    </div><!-- thumbs -->
+                    {{ end }} {{ end }}
+
+                    {{ .Content }}
+                </div><!-- thumbs && content-->
+
+            </div><!-- omg-tut-step -->
+
         {{ end }}
+
+        {{ .Content }}
+
+
+
+
+        <script>
+            window.onload = function() {
+                // boxHeight
+                let firstImg = document.querySelector('.omg-tut-box img:first-child');
+                let firstFrame = document.querySelector('.omg-tut-box iframe:first-child');
+                let firstMedia = firstImg ? firstImg : firstFrame;
+                let boxHeight = firstMedia.clientHeight;
+                firstFrame.style.height = boxHeight + 'px';
+
+                const slides = document.querySelectorAll('.omg-tut-thumbs label');
+                for (let i in slides) {
+                    slides[i].onmouseover = function () {
+                        this.click();
+
+                        const src = this.querySelector('img').getAttribute('src');
+                        const isYoutube = src.includes('youtube');
+
+                        const mediaId = 'media_' + this.getAttribute('for').split('_')[1];
+                        const selectedFrame = document.getElementById(mediaId);
+
+                        if (isYoutube && boxHeight) {
+                            selectedFrame.style.height = boxHeight + 'px';
+                            //selectedFrame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                        }
+
+                        // set boxHeight
+                        if (!isYoutube && selectedFrame) {
+                            boxHeight = selectedFrame.clientHeight;
+                            console.log(boxHeight);
+                        }
+
+                        // stop all youtube videos except selected
+                        const frames = document.querySelectorAll('iframe:not(#' + mediaId + ')');
+                        for (let j=0; j<frames.length; j++){
+                            frames[j].contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                        }
+                    };
+                }
+            };
+
+        </script>
+
 
     </div>
 </div>

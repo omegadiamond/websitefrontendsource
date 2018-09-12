@@ -1,7 +1,7 @@
 ---
 title: Warranty Information
 date: 2018-09-04T15:21:02-07:00
-draft: true
+draft: false
 # Used for general website pages - eg. About Us, Warranty, etc.
 ---
 

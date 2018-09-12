@@ -1,7 +1,7 @@
 ---
 title: Another Tutorial Title
 timeRequired: 1-2 hours
-image: 
+image: https://omegadiamond.com/system/files/images/HowTo_RS-BRJR_06.jpg
 parts:
 - 123-456
 tools:

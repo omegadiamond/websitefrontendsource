@@ -1,0 +1,64 @@
+<!--
+{{ partial "header.html" . }}
+
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell&#45;&#45;12-col">
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+    </div>
+
+{{ range $index, .Sections }}
+    <div class="mdl-cell">
+        <article class="mdl-card mdl-shadow&#45;&#45;4dp omg-card-product">
+            <section class="mdl-card__title">
+                <a href="{{ .Permalink }}">
+                    <h2 class="mdl-card__title-text">{{ .Title }}</h2>
+                </a>
+            </section>
+
+            {{ if .Params.Image}}
+                <section class="mdl-card__media">
+                    <a href="{{ .Permalink }}">
+                        <img src="{{ .Params.Image }}" alt="Card Example">
+                    </a>
+                </section>
+            {{ end }}
+
+            <section class="mdl-card__supporting-text">
+                {{ .Description }}
+            </section>
+
+            &lt;!&ndash; actions &ndash;&gt;
+            <section class="mdl-card__actions mdl-card&#45;&#45;border">
+
+                <strong class="omg-card-price">$4,321.00</strong>
+
+                <div>
+                    <button class="mdl-button mdl-button&#45;&#45;icon mdl-js-button mdl-js-ripple-effect mdl-button&#45;&#45;accent" id="share_{{ $index }}" title="Share">
+                        <i class="material-icons">share</i>
+                    </button>
+                    <ul class="mdl-menu mdl-menu&#45;&#45;top-right mdl-js-menu mdl-js-ripple-effect"
+                        for="share_{{ $index }}">
+                        <li class="mdl-menu__item"><a href="#">Facebook</a> </li>
+                        <li class="mdl-menu__item"><a href="#">Google +</a> </li>
+                        <li class="mdl-menu__item"><a href="#">Copy Link</a> </li>
+                    </ul>
+                    <div class="mdl-tooltip mdl-tooltip&#45;&#45;top" data-mdl-for="share_{{ $index }}">Share</div>
+
+                    &lt;!&ndash; add to cart &ndash;&gt;
+                    <a id="add_{{ $index }}" class="mdl-button mdl-js-button mdl-button&#45;&#45;icon mdl-js-ripple-effect mdl-button&#45;&#45;accent" href="#" title="Add to Cart">
+                        <i class="material-icons">add_shopping_cart</i>
+                    </a>
+                    <div class="mdl-tooltip mdl-tooltip&#45;&#45;top" data-mdl-for="add_{{ $index }}">Add to Cart</div>
+                    &lt;!&ndash;<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button&#45;&#45;raised mdl-button&#45;&#45;accent" title="Add to Cart">Add to Cart</button>&ndash;&gt;
+                </div>
+            </section>&lt;!&ndash; actions &ndash;&gt;
+        </article>&lt;!&ndash; mdl-card &ndash;&gt;
+    </div>&lt;!&ndash; mdl-cell &ndash;&gt;
+{{ end }}
+
+
+</div>&lt;!&ndash; mdl-grid &ndash;&gt;
+
+
+{{ partial "footer.html" . }}-->

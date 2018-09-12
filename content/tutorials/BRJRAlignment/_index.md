@@ -2,7 +2,7 @@
 title: Align BRJR
 description: "In some environments static electricity can push the string away from the rail, so it is critical that you wrap around and have string on both sides of a single rail bar and check the difference in the gap: if both sides show the same amount of gap, no matter how much that gap actually is, the rail is straight."
 timeRequired: 1-2 hours
-image: http://sdfsadf
+image: https://omegadiamond.com/system/files/images/HowTo_RS-BRJR_01.jpg
 parts:
 - 123-456
 tools:

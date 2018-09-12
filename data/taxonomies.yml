@@ -1,0 +1,11 @@
+taxonomies:
+  - stonecatalog:
+      name: Stone Catalog
+      children:
+        - accessories:
+            name: Accessories
+            children:
+              - adapters:
+                  name: Adapters
+              - bearings:
+                name: Bearings

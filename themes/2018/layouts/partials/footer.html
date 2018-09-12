@@ -1,14 +1,50 @@
-    </main><!-- mdl-layout__content -->
+		<!-- Bottom Nav -->
+		<div class="mdl-mini-footer omg-bottom-nav">
+			<div class="mdl-mini-footer__left-section">
+
+				<!-- logo-->
+				<a class="mdl-logo" href="{{.Site.BaseURL}}index.html">
+					Omega Diamond Inc.
+				</a>
+
+				<ul class="mdl-mini-footer__link-list">
+					<li><a href="{{.Site.BaseURL}}specifications">Specifications</a></li>
+					<li><a href="{{.Site.BaseURL}}contact">Contact</a></li>
+					<li><a href="{{.Site.BaseURL}}about-us">About Us</a></li>
+				</ul>
+
+			</div>
+		</div>
+
+        <!--<div class="omg-bottom-nav">
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell&#45;&#45;12-col">
+                    &lt;!&ndash; logo&ndash;&gt;
+                    <a href="{{.Site.BaseURL}}index.html">
+                        Omega Diamond Inc.
+                    </a>
+
+                    <ul>
+                        <li><a href="{{.Site.BaseURL}}specifications">Specifications</a></li>
+                        <li><a href="{{.Site.BaseURL}}contact">Contact</a></li>
+                        <li><a href="{{.Site.BaseURL}}about-us">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+-->
+	</main><!-- mdl-layout__content -->
+
+
+
 
     <!-- Footer -->
-    <footer class="mdl-mini-footer omg-footer" style="color: #fff;">
+    <footer class="mdl-mini-footer omg-footer">
 		<div class="mdl-mini-footer__left-section">
-
-
 			Call us toll-free at <a href="#">+1 (888) 996-4777</a>
 		</div>
 		<div class="mdl-mini-footer__right-section">
-			&#169;Copyright 2011-2013, Omega Diamond, Inc
+			&#169; Copyright 2011 - {{ now.Format "2006"}}, Omega Diamond, Inc.
 		</div>
 	</footer>
 

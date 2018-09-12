@@ -1,7 +1,6 @@
 ---
 title: {{ replace .TranslationBaseName "-" " " | title }}
 date: {{ .Date }}
-description: ""
 draft: true
-step: 1
+weight: 0
 ---
