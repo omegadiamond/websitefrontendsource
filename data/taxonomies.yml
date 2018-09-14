@@ -1,11 +1,24 @@
 taxonomies:
-  - stonecatalog:
-      name: Stone Catalog
-      children:
-        - accessories:
-            name: Accessories
-            children:
-              - adapters:
-                  name: Adapters
-              - bearings:
-                name: Bearings
+- key: accessories
+  name: Accessories
+- key: adapters
+  name: Adapters
+  parent: accessories
+- key: bearings
+  name: Bearings
+  parent: accessories
+
+- key: tooling
+  name: Tooling
+- key: porcelainpanel
+  name: Large Format Porcelain Panel
+  parent: tooling
+- key: cuttingblades
+  name: Cutting Blades
+  parent: tooling
+- key: coredrills
+  name: Core Drills
+  parent: cuttingblades
+- key: test
+  name: Test
+  parent: coredrills

@@ -60,21 +60,6 @@
         {{ end }}
     {{ end }}
 
-
-    {{ range $key, $el := $.Site.Data.taxonomies.taxonomies }}
-        {{ range $el }}
-            {{ $el.stonecatalog.children }} <br>
-        {{ end }}
-    {{ end }}
-
-    <hr>
-    <hr>    <br>
-    <hr>    <br>
-    {{ $.Site.Data.taxonomies.taxonomies }}
-
-
-
 </div><!-- mdl-grid -->
-
 
 {{ partial "footer.html" . }}

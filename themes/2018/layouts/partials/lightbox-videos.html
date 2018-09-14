@@ -1,0 +1,61 @@
+
+<ul id="lightboard-for-lightbox-video" class="mdlext-lightboard mdlext-js-lightboard mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events">
+
+    {{ range .videos }}
+    <li class="mdlext-lightboard__slide" data-details="[
+            {'name': 'Title', 'value': '{{ .title }}'},
+            {'name': 'Description', 'value': '{{ .description }}'}
+          ]">
+        <a href="https://www.youtube.com/embed/{{ .youtube_id }}" class="mdlext-lightboard__slide__frame">
+            <figure>
+                <img src="https://img.youtube.com/vi/{{ .youtube_id }}/0.jpg" title="Title 1">
+                <figcaption>{{ .title }}</figcaption>
+            </figure>
+        </a>
+    </li>
+    {{ end }}
+</ul>
+
+<!-- Video Dialog -->
+<dialog id="lightbox-dialog-video" class="mdlext-dialog" style="max-width: 100%;">
+    <div id="lightbox-video" class="mdlext-lightbox mdlext-js-lightbox mdl-card mdl-shadow--4dp">
+
+        <!--<div class="mdl-card__menu mdl-color-text&#45;&#45;white mdl-typography&#45;&#45;body-2-color-contrast">
+            <button data-action="close" class="mdl-button mdl-button&#45;&#45;icon mdl-js-button" title="Close">
+                <i class="material-icons">close</i>
+            </button>
+        </div>-->
+
+        <figure class="mdl-card__title" style="display: block; width: 560px; max-width: 100%;">
+            <iframe style="max-width: 100%;" width="560" height="315" src="https://www.youtube.com/embed/9O5N_QvoEBQ?wmode=opaque&amp;rel=0&amp;autohide=1&amp;showinfo=0&amp;wmode=transparent" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <figcaption data-action="select">Details</figcaption>
+        </figure>
+        <footer data-action="select" class="mdl-card__actions mdl-card--border">
+            <div class="mdl-card__supporting-text">
+                Image title
+            </div>
+            <nav>
+                <button data-action="first" class="mdl-button mdl-button--icon mdl-button--colored mdl-js-button" title="First">
+                    <i class="material-icons">first_page</i>
+                </button>
+                <button data-action="prev" class="mdl-button mdl-button--icon mdl-button--colored mdl-js-button" title="Previous">
+                    <i class="material-icons">chevron_left</i>
+                </button>
+                <button data-action="next" class="mdl-button mdl-button--icon mdl-button--colored mdl-js-button" title="Next">
+                    <i class="material-icons">chevron_right</i>
+                </button>
+                <button data-action="last" class="mdl-button mdl-button--icon mdl-button--colored mdl-js-button" title="Last">
+                    <i class="material-icons">last_page</i>
+                </button>
+
+                <button data-action="select" class="mdl-button mdl-button--icon mdl-button--colored mdl-js-button" title="Details">
+                    <i class="material-icons">info_outline</i>
+                </button>
+
+                <button data-action="close" class="mdl-button mdl-button--icon mdl-button--colored mdl-js-button" title="Close">
+                    <i class="material-icons">close</i>
+                </button>
+            </nav>
+        </footer>
+    </div>
+</dialog>

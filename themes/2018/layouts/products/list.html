@@ -1,27 +1,18 @@
-{{ partial "header.html" . }}
+{{ $styles := slice "/css/mdl-ext/mdl-ext-eqjs.min.css" "/css/mdl-ext/dialog-polyfill.css"}}
+{{ $scripts := slice "https://code.getmdl.io/1.3.0/material.min.js" "https://cdn.polyfill.io/v2/polyfill.min.js?features=default,es6" "/js/mdl-ext/dialog-polyfill.js" "/js/mdl-ext/mdl-ext.min.js" "/js/lightbox-images.js" "/js/lightbox-videos.js"}}
+
+{{ partial "header.html" (dict "pageStyles" $styles ) . }}
 
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--12-col">
         <h1>{{ .Title }}</h1>
 
-        <style>
-            .omg-product-form{
-                width: 100%;
-                min-height: 0;
-                margin-bottom: 20px;
-            }
-            .omg-product-form .mdl-card__media{
-                background-color: transparent;
-                padding: 10px 20px;
-            }
-        </style>
-
         <!-- addToCart form -->
         <div class="mdl-card mdl-shadow--2dp omg-product-form">
             <div class="mdl-card__media">
                 <div class="omg-product-form-details">
-                    <div>Price: $4,321.00</div>
-                    <div>SKU: {{ .Params.reference}}</div>
+                    <span>Price: $4,321.00</span>
+                    <span>SKU: {{ (index (split .Dir "/") 1) }}</span>
                 </div>
 
                 <form method="POST" action="#">
@@ -37,38 +28,47 @@
         <!-- tabs -->
         <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
             <div class="mdl-tabs__tab-bar">
+                <a href="#description" class="mdl-tabs__tab is-active">Description</a>
                 {{ range $index, $section := sort .Pages ".Params.weight" }}
-                    <a href="#{{ lower (replace .Title " " "_") }}_{{ $index }}" class="mdl-tabs__tab {{ if eq $index 0 }} is-active {{ end }}">{{ .Title }}</a>
+                    <a href="#{{ lower (replace .Title " " "_") }}_{{ $index }}" class="mdl-tabs__tab">{{ .Title }}</a>
                 {{ end }}
                 {{ if .Params.Attachments }}
-                    <a href="#attachments" class="mdl-tabs__tab {{ if eq (len .Pages) 0 }} is-active {{ end }}">Attachments</a>
+                    <a href="#attachments" class="mdl-tabs__tab">Attachments</a>
                 {{ end }}
             </div>
 
-            {{ range $index, $section := sort .Pages ".Params.weight" }}
-                <div id="{{ lower (replace .Title " " "_") }}_{{ $index }}" class="mdl-tabs__panel {{ if eq $index 0 }} is-active {{ end }}">
-                    <h2>{{ .Title }}</h2>
+            <div id="description" class="mdl-tabs__panel is-active">
+                <h2>Description</h2>
+                {{ .Content }}
 
-                    {{ .Content }}
-
-                    {{ if eq $index 0 }}
-                        <section>
-                            <h3>Image Gallery</h3>
-                            {{ partial "image-gallery-test.html" . }}
-                        </section>
-
-                        <section>
-                            <h3>Video Gallery</h3>
-
-                            {{ partial "video-gallery-test.html" . }}
-                        </section>
-
-                        <section>
-                            <h3>Related Products</h3>
-
-                            {{ partial "related-products-test.html" . }}
-                        </section>
+                <!--  images -->
+                <section>
+                    {{ if $.Params.images }}
+                        <h3>Image Gallery</h3>
+                        {{ partial "lightbox-images.html" (dict "images" $.Params.images "productTitle" $.Title) }}
                     {{ end }}
+                </section><!-- images -->
+
+                <!-- videos -->
+                <section>
+                    {{ $videos := where $.Site.Data.videos.videos "keys" "intersect" (slice (index (split .Dir "/") 1)) }}
+                    {{ if $videos }}
+                        <h3>Video Gallery</h3>
+                        {{ partial "lightbox-videos.html" (dict "videos" $videos)}}
+                    {{ end }}
+                </section><!-- videos -->
+
+                <section>
+                    <h3>Related Products</h3>
+
+                    <!--{{ partial "related-products-test.html" . }}-->
+                </section>
+            </div>
+
+            {{ range $index, $section := sort .Pages ".Params.weight" }}
+                <div id="{{ lower (replace .Title " " "_") }}_{{ $index }}" class="mdl-tabs__panel">
+                    <h2>{{ .Title }}</h2>
+                    {{ .Content }}
                 </div>
             {{ end }}
 
@@ -77,7 +77,7 @@
                     <h2>Attachments</h2>
                     <ul>
                         {{ range .Params.Attachments }}
-                            <li><a href="{{ .url }}" target="_blank">{{ .title }}</a> </li>
+                            <li><a href="{{ .url }}">{{ .title }}</a> </li>
                         {{ end }}
                     </ul>
                 </div>
@@ -86,4 +86,4 @@
     </div>
 </div>
 
-{{ partial "footer.html" . }}
+{{ partial "footer.html" (dict "pageScripts" $scripts ) . }}

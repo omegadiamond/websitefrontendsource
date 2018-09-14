@@ -1,9 +1,19 @@
 ---
-# This is a sellable product template.
-title: "Product Name Goes Here"
-reference: {{ .File.TranslationBaseName }}
-# Use aliases for old part numbers: https://gohugo.io/content-management/urls/#aliases/
-date: {{ .Date }}
+title: Product Name...
+description: ""
+image: /products/...
+featured: false
 sellable: false
+taxonomies: 
+    - key: 
+      weight: 0
+attachments:
+    - title:
+      url: 
+images: 
+    - title:
+      url: 
+related: 
+date: {{ .Date }}
 draft: true
 ---

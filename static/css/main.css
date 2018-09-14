@@ -166,9 +166,17 @@ html, body{
 }
 
 /* PRODUCT single */
-.omg-product-form .mdl-card__media{
+
+.omg-product-form{
+    width: 100%;
+    min-height: 0;
+    margin-bottom: 20px;
 }
-.omg-product-form-details div{
+.omg-product-form .mdl-card__media{
+    background-color: transparent;
+    padding: 10px 20px;
+}
+.omg-product-form-details span{
     display: inline-block;
     margin-right: 10px;
     font-size: 16px;
@@ -190,7 +198,7 @@ html, body{
         flex-wrap: wrap;
         justify-content: space-between;
     }
-    .omg-product-form-details div{
+    .omg-product-form-details span{
         display: block;
         line-height: 24px;
     }
