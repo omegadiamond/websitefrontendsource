@@ -1,24 +1,77 @@
 taxonomies:
-- key: accessories
-  name: Accessories
-- key: adapters
-  name: Adapters
-  parent: accessories
-- key: bearings
-  name: Bearings
-  parent: accessories
+  accessories:
+    root: true
+    root_weight: 15
+    name: Accessories
+    children:
+    - adapters
+    - bearings
+    - stone_chemicals
+    - laminating_mitering
+  adapters:
+    name: Adapters
+  bearings:
+    name: Bearings
+    children:
+      - test
+  stone_chemicals:
+    name: Stone Chemicals and Glue
+  laminating_mitering:
+    name: Laminating or Mitering
 
-- key: tooling
-  name: Tooling
-- key: porcelainpanel
-  name: Large Format Porcelain Panel
-  parent: tooling
-- key: cuttingblades
-  name: Cutting Blades
-  parent: tooling
-- key: coredrills
-  name: Core Drills
-  parent: cuttingblades
-- key: test
-  name: Test
-  parent: coredrills
+  tooling:
+    root: true
+    root_weight: 20
+    name: Tooling
+    children:
+      - porcelain_panel
+      - cutting_blades
+      - edge_shaping
+      - polishing
+  porcelain_panel:
+    name: Large Format Porcelain Panel
+  cutting_blades:
+    name: Cutting Blades
+    chilldren:
+      - core_drills
+  core_drills:
+    name: Core Drills
+  edge_shaping:
+    name: Edge Shaping
+    children:
+      - cnc_radialarm
+      - cup_wheels
+      - router_bits
+  cnc_radialarm:
+    name: CNC or Radial-arm
+  cup_wheels:
+    name: Cup Wheels
+    children:
+      - test
+  router_bits:
+    name: Router Bits
+  polishing:
+    root: true
+    root_weight: 30
+    name: Polishing
+    children:
+      - oscillating_head_system
+  oscillating_head_system:
+    name: Oscillating Head System
+
+  machineparts:
+    name: Machine Parts
+
+  test:
+    root: true
+    root_weight: 40
+    name: Test
+    children:
+      - test2
+  test2:
+    name: Test2
+
+  featured:
+    root: true
+    root_weight: 10
+    name: Featured

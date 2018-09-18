@@ -5,8 +5,8 @@ image: /products/439-200 BRMM Upgrade Kit 2018.jpg
 featured: false
 sellable: false
 taxonomies: 
-    - key: 
-      weight: 60
+    - key: cup_wheels
+      weight: 10
 date: 2018-09-13T16:03:07-07:00
 draft: true
 images: 

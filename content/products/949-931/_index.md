@@ -1,14 +1,15 @@
 ---
-# This is a sellable product template.
 title: "Red Ripper Ultralight™ Stone Router without grinder"
 description: "Keeping bits properly wet while routing the inside of a sink - or anywhere else you have inside corners - can be a bear: the hose is always running into the stone or missing the grinding or polishing surface."
 image: https://omegadiamond.com/system/files/images/IMG_3004%28web%29.preview.jpg
 reference: "808-488"
-# Use aliases for old part numbers: https://gohugo.io/content-management/urls/#aliases/
 date: 2018-01-29T14:56:13-08:00
 sellable: false
 draft: true
 attachments:
+taxonomies: 
+    - key: featured
+      weight: 15
 ---
 
 The Red Ripper Ultralight™ Stone Router is our lightest router yet! Weighing in at only 11 lbs, you can easily pick up this router with one hand! It is built for profiling sinks and edges, and is perfect for pre-fabs. The built-in hydroplaning base helps the router move smoothly over the surface of the stone without scratching. Works on both natural and engineered stone. While the router is light, it is no lightweight when it comes to the size of bits it can use - almost all standard 7/8 bore with M10-1.5 bolt router bits will fit and be usable, including all common 2, 3, and 4cm bits.  We've even seen guys swing larger bits, but that can cause the machine to become unbalanced, requiring a weight in the back to level things back out again!

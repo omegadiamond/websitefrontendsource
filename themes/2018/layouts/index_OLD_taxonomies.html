@@ -1,0 +1,267 @@
+{{ partial "header.html" . }}
+
+{{ range $rootKey, $tax := .Site.Data.taxonomies.taxonomies }}
+{{ if not (eq .root false) }}
+<b>{{ $rootKey }}</b>: {{ $tax }} <br>
+{{ $.Scratch.SetInMap (printf "%s%s" "k_" $rootKey) "name" $tax.name }}
+{{ $.Scratch.SetInMap (printf "%s%s" "k_" $rootKey) "weight" 20 }}
+{{ $.Scratch.SetInMap "roots2" (printf "%s%s" "k_" $rootKey) ($.Scratch.Get (printf "%s%s" "k_" $rootKey)) }}
+{{ $.Scratch.Delete (printf "%s%s" "k_" $rootKey) }}
+{{ end }}
+{{ end }}
+
+<hr>
+<b>Root2</b>: {{ $.Scratch.Get "roots2" }}
+<hr>
+
+<h3>Taxonomies</h3>
+
+{{ range $otherKey, $root := $.Scratch.Get "roots2" }}
+{{ $otherKey := index (split $otherKey "_") 1 }}
+
+<b>{{ $otherKey }}</b>: {{ $root.name }} <br>
+
+{{ $rootIndex := $otherKey }}
+{{ $.Scratch.Set $rootIndex (slice $otherKey) }}
+
+{{ $tax := index $.Site.Data.taxonomies.taxonomies (string $otherKey) }}
+
+{{ range $childKey := $tax.children }}
+-- {{ $childKey }} <br>
+{{ $.Scratch.Add $rootIndex (slice  $childKey) }}
+{{ $tax := index $.Site.Data.taxonomies.taxonomies (string $childKey) }}
+
+{{ range $childKey := $tax.children }}
+---- {{ $childKey }} <br>
+{{ $.Scratch.Add $rootIndex (slice  $childKey) }}
+{{ $tax := index $.Site.Data.taxonomies.taxonomies (string $childKey) }}
+
+{{ range $childKey := $tax.children }}
+------ {{ $childKey }} <br>
+{{ $.Scratch.Add $rootIndex (slice  $childKey) }}
+{{ $tax := index $.Site.Data.taxonomies.taxonomies (string $childKey) }}
+
+{{ range $childKey := $tax.children }}
+-------- {{ $childKey }} <br>
+{{ $.Scratch.Add $rootIndex (slice  $childKey) }}
+{{ $tax := index $.Site.Data.taxonomies.taxonomies (string $childKey) }}
+{{ end }}
+
+{{ end }}
+
+{{ end }}
+
+{{ end }}
+
+{{ end }}
+
+<hr>
+{{ $.Scratch.Get "tooling_k" }}
+
+
+{{ $.Scratch.Delete "roots2" }}
+
+<br>
+<br>
+<br>
+<br>
+<hr>
+
+
+{{/* RANGE THROUGH TAXONOMIES DATA */}}
+{{ range $keyParent, $tax := .Site.Data.taxonomies.taxonomies }}
+{{ if not (eq .root false) }}
+{{ $.Scratch.SetInMap "categories" $keyParent $keyParent }}
+
+{{ $.Scratch.SetInMap $keyParent "key" $keyParent }}
+{{ $.Scratch.SetInMap $keyParent "name" $tax.name }}
+{{ $.Scratch.SetInMap $keyParent "weight" "10" }}
+{{ $.Scratch.SetInMap "roots" $keyParent ($.Scratch.Get $keyParent) }}
+{{ $.Scratch.Delete $keyParent }}
+
+{{ if $tax.children }}
+
+{{ range $keyChild := $tax.children }}
+{{ $.Scratch.SetInMap "categories" $keyChild $keyParent }}
+{{ $tax := index $.Site.Data.taxonomies.taxonomies $keyChild }}
+
+{{ if $tax.children }}
+{{ range $keyChild := $tax.children }}
+{{ $.Scratch.SetInMap "categories" $keyChild $keyParent }}
+{{ $tax := index $.Site.Data.taxonomies.taxonomies $keyChild }}
+
+{{ if $tax.children }}
+{{ range $keyChild := $tax.children }}
+{{ $.Scratch.SetInMap "categories" $keyChild $keyParent }}
+{{ $tax := index $.Site.Data.taxonomies.taxonomies $keyChild }}
+
+{{ if $tax.children }}
+{{ range $keyChild := $tax.children }}
+{{ $.Scratch.SetInMap "categories" $keyChild $keyParent }}
+{{ $tax := index $.Site.Data.taxonomies.taxonomies $keyChild }}
+
+{{ if $tax.children }}
+{{ range $keyChild := $tax.children }}
+{{ $.Scratch.SetInMap "categories" $keyChild $keyParent }}
+{{ $tax := index $.Site.Data.taxonomies.taxonomies $keyChild }}
+
+{{ if $tax.children }}
+{{ range $keyChild := $tax.children }}
+{{ $.Scratch.SetInMap "categories" $keyChild $keyParent }}
+{{ $tax := index $.Site.Data.taxonomies.taxonomies $keyChild }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+
+{{/* FORCE ADD FEATURED TO SCRATCH MAPS */}}
+{{ $.Scratch.SetInMap "categories" "featured" "featured" }}
+{{ $.Scratch.SetInMap "featured" "key" "featured" }}
+{{ $.Scratch.SetInMap "featured" "name" "Featured" }}
+{{ $.Scratch.SetInMap "featured" "weight" "5" }}
+{{ $.Scratch.SetInMap "roots" "featured" ($.Scratch.Get "featured") }}
+{{ $.Scratch.Delete "featured" }}
+
+<hr>
+<b>Scratch Root</b>: {{ $.Scratch.Get "roots" }}
+<hr>
+<b>Scratch Categories</b>: {{ $.Scratch.Get "categories" }}
+<hr>
+
+<div class="mdl-grid">
+    {{ range $products := where .Sections "Section" "products" }}
+
+    <div class="mdl-cell mdl-cell--12-col">
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+    </div>
+
+    {{/* RANGE THROUGH SECTIONS/PRODUCTS */}}
+    {{ range $section := .Sections }}
+    {{ $sku := index (split .Dir "/") 1}}
+    {{ range $tax := $section.Params.taxonomies }}
+
+    {{ $parent := index ($.Scratch.Get "categories") (string $tax.key) }}
+
+    sku: {{ $section.Params.taxonomies }} <br>
+    parent: {{ $parent }} <br>
+    <br>
+
+    {{ $.Scratch.SetInMap $sku "sku" $sku }}
+    {{ $.Scratch.SetInMap $sku "title" $section.Params.title }}
+    {{ $.Scratch.SetInMap $sku "description" $section.Params.description }}
+    {{ $.Scratch.SetInMap $sku "permalink" $section.Permalink }}
+    {{ $.Scratch.SetInMap $sku "image" $section.Params.image }}
+    {{ $.Scratch.SetInMap $sku "weight" $tax.weight }}
+
+    {{ $.Scratch.SetInMap (string $parent) $sku ($.Scratch.Get $sku) }}
+    {{ $.Scratch.Delete $sku }}
+
+    {{/* FEATURED */}}
+    {{ if eq $tax.key "featured" }}
+    <!--{{ $tax.key}} <br>-->
+    {{ end  }}
+
+    {{ end }}
+    {{ end }}
+    {{ $.Scratch.Delete "categories" }}
+
+    {{/* RANGE THROUGH ROOT_CATEGORIES -> PRODUCTS */}}
+    {{ $roots := $.Scratch.Get "roots" }}
+    {{ range $root := sort $roots "weight" }}
+    {{ if $root.key }}
+
+    <br><br><br>
+    {{ $root.key }}:
+    {{ $root }}<br>
+    <br>
+
+    {{ $rootCategory := ($.Scratch.Get $root.key) }}
+    {{ if $rootCategory }}
+
+    Root Category: {{ $rootCategory }} <br>
+
+    <div class="mdl-cell mdl-cell--12-col">
+        <h2><a href="#">{{ $root.name }}</a> </h2>
+    </div>
+    {{ range $index, $product := sort $rootCategory "weight" | first 9 }}
+
+    <!--<div class="mdl-cell">
+        <article class="mdl-card mdl-shadow&#45;&#45;4dp omg-card-product">
+            <section class="mdl-card__title">
+                <a href="{{ $product.permalink }}">
+                    <h3 class="mdl-card__title-text">{{ $product.title }}</h3>
+                </a>
+            </section>
+
+            {{ if $product.image}}
+            <section class="mdl-card__media">
+                <a href="{{ $product.permalink }}">
+                    <img src="{{ $product.image }}" alt="Card Example">
+                </a>
+            </section>
+            {{ end }}
+
+            <section class="mdl-card__supporting-text">
+                {{ $product.description }}
+            </section>
+
+            &lt;!&ndash; actions &ndash;&gt;
+            <section class="mdl-card__actions mdl-card&#45;&#45;border">
+                <strong class="omg-card-price">$4,321.00</strong>
+
+                <div>
+                    <button class="mdl-button mdl-button&#45;&#45;icon mdl-js-button mdl-js-ripple-effect mdl-button&#45;&#45;accent" id="share_{{ $index }}" title="Share">
+                        <i class="material-icons">share</i>
+                    </button>
+                    <ul class="mdl-menu mdl-menu&#45;&#45;top-right mdl-js-menu mdl-js-ripple-effect"
+                        for="share_{{ $index }}">
+                        <li class="mdl-menu__item"><a href="#">Facebook</a> </li>
+                        <li class="mdl-menu__item"><a href="#">Google +</a> </li>
+                        <li class="mdl-menu__item"><a href="#">Copy Link</a> </li>
+                    </ul>
+                    <div class="mdl-tooltip mdl-tooltip&#45;&#45;top" data-mdl-for="share_{{ $index }}">Share</div>
+
+                    &lt;!&ndash; add to cart &ndash;&gt;
+                    <a id="add_{{ $index }}" class="mdl-button mdl-js-button mdl-button&#45;&#45;icon mdl-js-ripple-effect mdl-button&#45;&#45;accent" href="#" title="Add to Cart">
+                        <i class="material-icons">add_shopping_cart</i>
+                    </a>
+                    <div class="mdl-tooltip mdl-tooltip&#45;&#45;top" data-mdl-for="add_{{ $index }}">Add to Cart</div>
+                    &lt;!&ndash;<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button&#45;&#45;raised mdl-button&#45;&#45;accent" title="Add to Cart">Add to Cart</button>&ndash;&gt;
+                </div>
+            </section>&lt;!&ndash; actions &ndash;&gt;
+        </article>&lt;!&ndash; mdl-card &ndash;&gt;
+    </div>&lt;!&ndash; mdl-cell &ndash;&gt;-->
+
+    {{ end }}
+    <!--<div class="mdl-cell mdl-cell&#45;&#45;12-col mdl-typography&#45;&#45;text-center">
+        <h4>
+            <a href="#" class="mdl-button mdl-js-button mdl-color&#45;&#45;amber-400">
+                View all {{ $root.name }}
+                <i class="material-icons">arrow_forward</i>
+            </a>
+        </h4>
+    </div>-->
+    {{ end }}
+    {{ $.Scratch.Delete $root.key }}
+    {{ end }}
+    {{ end }}
+    {{ $.Scratch.Delete "roots" }}
+
+
+    {{ end }}
+</div><!-- mdl-grid -->
+
+
+
+{{ partial "footer.html" . }}

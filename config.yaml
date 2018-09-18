@@ -6,3 +6,7 @@ theme: "2018"
 
 permalinks:
   products: /:filename
+
+taxonomies:
+  tag: tags
+  category: categories

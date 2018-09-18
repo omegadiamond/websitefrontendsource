@@ -2,11 +2,18 @@
 title: Red Ripper Ultralight™ Stone Router
 description: ""
 image: https://omegadiamond.com/system/files/imagecache/product_full/images/products/IMG_6600%28web%29.jpg
-featured: false
 sellable: false
 taxonomies: 
-    - key: 
-      weight: 0
+    - key: featured
+      weight: 30
+    - key: bearings
+      weight: 50
+    - key: featured
+      weight: 20
+    - key: adapters
+      weight: 10
+    - key: adapters
+      weight: 10
 attachments:
     - title: Red Ripper Ultralight Manual
       url: /pdf/Red Ripper Ultralight Manual 20140617-web.pdf

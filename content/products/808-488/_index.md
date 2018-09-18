@@ -1,13 +1,15 @@
 ---
-# This is a sellable product template.
 title: "Red Ripper Ultralight™ Stone Router without grinder"
 description: "The Red Ripper Ultralight™ Stone Router is our lightest router yet! Weighing in at only 11 lbs, you can easily pick up this router with one hand!"
 image: /img/card-example.jpg
-reference: "808-488"
-# Use aliases for old part numbers: https://gohugo.io/content-management/urls/#aliases/
 date: 2018-01-29T14:56:13-08:00
 sellable: false
 draft: true
+taxonomies: 
+    - key: featured
+      weight: 10
+    - key: router_bits
+      weight: 13
 attachments:
 - title: Manual
   url: /pdf/2013072401 - Rev A.pdf

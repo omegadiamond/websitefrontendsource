@@ -5,8 +5,8 @@ image: /products/IMG_9280_8 inch Blade (web).jpg
 featured: false
 sellable: false
 taxonomies: 
-    - key: 
-      weight: 0
+    - key: test
+      weight: 56
 images: 
     - title:
       url: /products/IMG_8337-editedCropRotated (web).preview.jpg

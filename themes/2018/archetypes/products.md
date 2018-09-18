@@ -12,7 +12,7 @@ attachments:
       url: 
 images: 
     - title:
-      url: 
+      url: /products/...
 related: 
 date: {{ .Date }}
 draft: true
