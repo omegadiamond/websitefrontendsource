@@ -7,6 +7,34 @@ theme: "2018"
 permalinks:
   products: /:filename
 
-taxonomies:
-  tag: tags
-  category: categories
+outputFormats:
+  TaxonomyTree:
+    mediaType: "application/json"
+    baseName: "taxonomytree"
+    isPlainText: true
+    notAlternative: true
+  TaxonomyList:
+    mediaType: "application/json"
+    baseName: "taxonomylist"
+    isPlainText: true
+    notAlternative: true
+  ProductsRaw:
+    mediaType: "application/json"
+    baseName: "productsraw"
+    isPlainText: true
+    notAlternative: true
+  Test:
+    mediaType: "application/json"
+    baseName: "test"
+    isPlainText: true
+    notAlternative: true
+
+outputs:
+  home:
+  - html
+  - TaxonomyTree
+  - TaxonomyList
+  - ProductsRaw
+  - Test
+  products:
+  - html

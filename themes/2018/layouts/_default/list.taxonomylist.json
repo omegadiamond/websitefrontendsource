@@ -1,0 +1,25 @@
+{{- $taxList := .Site.Data.taxonomies.taxonomies -}}
+{{- $.Scratch.Set "count" 0 -}}
+
+[
+{{- range $rootKey, $tax := $taxList -}}
+
+{
+"key" : "{{- $rootKey -}}",
+"name": "{{- $tax.name -}}"
+{{- if $tax.root -}}, "root": "{{- $tax.root -}}"{{- end -}}
+{{- if $tax.root_weight -}}, "weight": "{{- $tax.root_weight -}}"{{- end -}}
+{{- if $tax.children -}}
+  , "children": [
+  {{- range $chindex, $child := $tax.children -}}
+    "{{- $child -}}"{{- if ne (add $chindex 1) (len $tax.children) -}},{{- end -}}
+  {{- end -}}
+  ]
+{{- end -}}
+
+
+}{{- if ne (add ($.Scratch.Get "count") 1) (len $taxList) -}},{{- end -}}
+
+{{- $.Scratch.Add "count" 1}}
+{{- end -}}
+]

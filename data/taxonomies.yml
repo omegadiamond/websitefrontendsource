@@ -8,6 +8,7 @@ taxonomies:
     - bearings
     - stone_chemicals
     - laminating_mitering
+    - test
   adapters:
     name: Adapters
   bearings:
@@ -32,7 +33,7 @@ taxonomies:
     name: Large Format Porcelain Panel
   cutting_blades:
     name: Cutting Blades
-    chilldren:
+    children:
       - core_drills
   core_drills:
     name: Core Drills
@@ -67,11 +68,9 @@ taxonomies:
     root_weight: 40
     name: Test
     children:
-      - test2
-  test2:
-    name: Test2
-
-  featured:
-    root: true
-    root_weight: 10
-    name: Featured
+      - another2
+      - another3
+  another2:
+    name: Another2
+  another3:
+    name: Another3

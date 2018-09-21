@@ -1,0 +1,10 @@
+{{- $.Scratch.Set "productsRaw" slice -}}
+
+{{ range $products := where .Sections "Section" "products" }}
+{{ range $p := .Sections }}
+  {{ $sku := index (split .Dir "/") 1}}
+  {{ $.Scratch.Add "productsRaw" (dict "sku" $sku "permalink" .Permalink "title" .Title "description" .Description "image" .Params.image "taxonomies" .Params.taxonomies "date" .Date "content" .Content) }}
+{{ end }}
+{{ end }}
+
+{{- $.Scratch.Get "productsRaw" | jsonify -}}

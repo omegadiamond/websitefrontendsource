@@ -1,5 +1,5 @@
 ---
-title: "Red Ripper Ultralight™ Stone Router without grinder"
+title: "Red Ripper Ultralight™ Stone Router without grinder 2"
 description: "Keeping bits properly wet while routing the inside of a sink - or anywhere else you have inside corners - can be a bear: the hose is always running into the stone or missing the grinding or polishing surface."
 image: https://omegadiamond.com/system/files/images/IMG_3004%28web%29.preview.jpg
 reference: "808-488"

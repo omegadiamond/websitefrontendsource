@@ -1,0 +1,15 @@
+{{- $.Scratch.Set "catList" slice -}}
+
+{{- range $key, $tax := $.Site.Data.taxonomies.taxonomies -}}
+  {{- $.Scratch.Set "parents" slice -}}
+
+  {{- range $tKey, $tax := $.Site.Data.taxonomies.taxonomies -}}
+    {{- if in $tax.children $key -}}
+      {{- $.Scratch.Add "parents" $tKey}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $.Scratch.Add "catList" (dict "key" $key "name" $tax.name "root" $tax.root "root_weight" $tax.root_weight "children" $tax.children "parents" ($.Scratch.Get "parents")) -}}
+{{- end -}}
+
+{{- $.Scratch.Get "catList" | jsonify -}}

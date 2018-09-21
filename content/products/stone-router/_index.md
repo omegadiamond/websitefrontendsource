@@ -14,6 +14,6 @@ images:
     - title:
       url: /products/...
 related: 
-date: {{ .Date }}
+date: 2018-09-18T13:58:50-07:00
 draft: true
 ---
