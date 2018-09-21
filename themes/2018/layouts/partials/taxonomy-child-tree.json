@@ -1,0 +1,22 @@
+{{- $taxList := .taxList -}}
+{{- $children := .children -}}
+
+{{- if $children -}}
+{
+  {{- range $index, $child := $children -}}
+    {{- $tax := index $taxList $child -}}
+
+    "{{- $child -}}" : {
+    "name": "{{- $tax.name -}}"
+
+    {{- if $tax.children -}}
+    , "children" :
+    {{- partial "taxonomy-child-tree.json" (dict "children" $tax.children "taxList" $taxList) -}}
+    {{- end -}}
+
+
+    }{{- if ne (add $index 1) (len $children) -}},{{- end -}}
+
+  {{- end -}}
+}
+{{- end -}}

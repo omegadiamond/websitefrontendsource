@@ -1,39 +1,274 @@
-{{ $list := .Data.Pages -}}
-{{ $length := (len $list) -}}
 {
-"items" : [
-{{ range $index, $element := $list -}}
-{
-"title" : {{ .Title | jsonify }},
-"date_published" : "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
-{{ if .Lastmod -}}
-"date_modified" : "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
-{{ else -}}
-"date_modified" : "{{ .LastMod.Format "2006-01-02T15:04:05Z07:00" }}",
-{{ end -}}
-"id" : "{{ .Permalink }}",
-"url" : "{{ .Permalink }}",
-{{ with .Params.author -}}
-"author" : {
-"name" : "{{ . }}"
-},
-{{ end -}}
-"content_html" : {{ .Content | jsonify }}
-}{{ if ne (add $index 1) $length }},{{ end }}
-{{ end -}}
-]
-}
-
-{
-"taxonomies" : [{
-"key" : $rootKey},
-{
-"key" : $rootKey},
-{
-"key" : $rootKey},
-{
-"key" : $rootKey},
-{
-"key" : $rootKey}
-]
+  "accessories": {
+    "name": "Accessories",
+    "parents": {}
+  },
+  "adapters": {
+    "name": "Adapters",
+    "parents": {
+      "accessories": {
+        "name": "Accessories",
+        "parents": {}
+      }
+    }
+  },
+  "another2": {
+    "name": "Another2",
+    "parents": {
+      "test": {
+        "name": "Test",
+        "parents": {
+          "accessories": {
+            "name": "Accessories",
+            "parents": {}
+          },
+          "bearings": {
+            "name": "Bearings",
+            "parents": {
+              "accessories": {
+                "name": "Accessories",
+                "parents": {}
+              }
+            }
+          },
+          "cup_wheels": {
+            "name": "Cup Wheels",
+            "parents": {
+              "edge_shaping": {
+                "name": "Edge Shaping",
+                "parents": {
+                  "tooling": {
+                    "name": "Tooling",
+                    "parents": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "another3": {
+    "name": "Another3",
+    "parents": {
+      "test": {
+        "name": "Test",
+        "parents": {
+          "accessories": {
+            "name": "Accessories",
+            "parents": {}
+          },
+          "bearings": {
+            "name": "Bearings",
+            "parents": {
+              "accessories": {
+                "name": "Accessories",
+                "parents": {}
+              }
+            }
+          },
+          "cup_wheels": {
+            "name": "Cup Wheels",
+            "parents": {
+              "edge_shaping": {
+                "name": "Edge Shaping",
+                "parents": {
+                  "tooling": {
+                    "name": "Tooling",
+                    "parents": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "bearings": {
+    "name": "Bearings",
+    "parents": {
+      "accessories": {
+        "name": "Accessories",
+        "parents": {}
+      }
+    }
+  },
+  "cnc_radialarm": {
+    "name": "CNC or Radial-arm",
+    "parents": {
+      "edge_shaping": {
+        "name": "Edge Shaping",
+        "parents": {
+          "tooling": {
+            "name": "Tooling",
+            "parents": {}
+          }
+        }
+      }
+    }
+  },
+  "core_drills": {
+    "name": "Core Drills",
+    "parents": {
+      "cutting_blades": {
+        "name": "Cutting Blades",
+        "parents": {
+          "accessories": {
+            "name": "Accessories",
+            "parents": {}
+          },
+          "tooling": {
+            "name": "Tooling",
+            "parents": {}
+          }
+        }
+      }
+    }
+  },
+  "cup_wheels": {
+    "name": "Cup Wheels",
+    "parents": {
+      "edge_shaping": {
+        "name": "Edge Shaping",
+        "parents": {
+          "tooling": {
+            "name": "Tooling",
+            "parents": {}
+          }
+        }
+      }
+    }
+  },
+  "cutting_blades": {
+    "name": "Cutting Blades",
+    "parents": {
+      "accessories": {
+        "name": "Accessories",
+        "parents": {}
+      },
+      "tooling": {
+        "name": "Tooling",
+        "parents": {}
+      }
+    }
+  },
+  "edge_shaping": {
+    "name": "Edge Shaping",
+    "parents": {
+      "tooling": {
+        "name": "Tooling",
+        "parents": {}
+      }
+    }
+  },
+  "laminating_mitering": {
+    "name": "Laminating or Mitering",
+    "parents": {
+      "accessories": {
+        "name": "Accessories",
+        "parents": {}
+      }
+    }
+  },
+  "machineparts": {
+    "name": "Machine Parts",
+    "parents": {}
+  },
+  "oscillating_head_system": {
+    "name": "Oscillating Head System",
+    "parents": {
+      "polishing": {
+        "name": "Polishing",
+        "parents": {
+          "tooling": {
+            "name": "Tooling",
+            "parents": {}
+          }
+        }
+      }
+    }
+  },
+  "polishing": {
+    "name": "Polishing",
+    "parents": {
+      "tooling": {
+        "name": "Tooling",
+        "parents": {}
+      }
+    }
+  },
+  "porcelain_panel": {
+    "name": "Large Format Porcelain Panel",
+    "parents": {
+      "tooling": {
+        "name": "Tooling",
+        "parents": {}
+      }
+    }
+  },
+  "rootless": {
+    "name": "Rootless",
+    "parents": {}
+  },
+  "router_bits": {
+    "name": "Router Bits",
+    "parents": {
+      "edge_shaping": {
+        "name": "Edge Shaping",
+        "parents": {
+          "tooling": {
+            "name": "Tooling",
+            "parents": {}
+          }
+        }
+      }
+    }
+  },
+  "stone_chemicals": {
+    "name": "Stone Chemicals and Glue",
+    "parents": {
+      "accessories": {
+        "name": "Accessories",
+        "parents": {}
+      }
+    }
+  },
+  "test": {
+    "name": "Test",
+    "parents": {
+      "accessories": {
+        "name": "Accessories",
+        "parents": {}
+      },
+      "bearings": {
+        "name": "Bearings",
+        "parents": {
+          "accessories": {
+            "name": "Accessories",
+            "parents": {}
+          }
+        }
+      },
+      "cup_wheels": {
+        "name": "Cup Wheels",
+        "parents": {
+          "edge_shaping": {
+            "name": "Edge Shaping",
+            "parents": {
+              "tooling": {
+                "name": "Tooling",
+                "parents": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tooling": {
+    "name": "Tooling",
+    "parents": {}
+  }
 }

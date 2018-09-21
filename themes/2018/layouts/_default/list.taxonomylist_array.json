@@ -1,38 +1,33 @@
 {{- $taxList := .Site.Data.taxonomies.taxonomies -}}
 {{- $.Scratch.Set "count" 0 -}}
 
-{
+[
 {{- range $rootKey, $tax := $taxList -}}
 
-  "{{- $rootKey -}}" : {
+  {
+  "key" : "{{- $rootKey -}}",
   "name": "{{- $tax.name -}}"
   {{- if $tax.root -}}, "root": {{- $tax.root -}}{{- end -}}
-  {{- if $tax.root_weight -}}, "weight": {{- $tax.root_weight -}}{{- end -}}
-    {{- if $tax.children -}}
-      , "childList": [
-      {{- range $chindex, $child := $tax.children -}}
-        "{{- $child -}}"{{- if ne (add $chindex 1) (len $tax.children) -}},{{- end -}}
-      {{- end -}}
-      ], "children" :
-      {{- partial "taxonomy-child-tree.json" (dict "children" $tax.children "taxList" $taxList) -}}
+  {{- if $tax.root_weight -}}, "weight": "{{- $tax.root_weight -}}"{{- end -}}
+  {{- if $tax.children -}}
+    , "children": [
+    {{- range $chindex, $child := $tax.children -}}
+      "{{- $child -}}"{{- if ne (add $chindex 1) (len $tax.children) -}},{{- end -}}
     {{- end -}}
-
-  {{- $parents := partial "taxonomy-parent-tree.json" (dict "taxList" $taxList "key" $rootKey "scratch" $.Scratch) -}}
-  {{- if $parents -}}
-    , "parents" : {
-      {{- $parents -}}
-    }
+    ]
   {{- end -}}
+
 
   {{- $.Scratch.Set "parentStr" "" -}}
   {{- range $key2, $tax2 := $taxList -}}
     {{- if (in $tax2.children $rootKey) -}}
 
       {{- $.Scratch.Add "parentStr" (printf "%s%s" $key2 ",") -}}
-      {{- $partial := partial "taxonomy-child-list.json" (dict "taxList" $taxList "category" $key2) -}}
+      {{- $partial := partial "taxonomylist-rec.json" (dict "taxList" $taxList "category" $key2) -}}
       {{- if $partial -}}
         {{- $.Scratch.Add "parentStr" $partial -}}
       {{- end -}}
+
 
     {{- end -}}
   {{- end -}}
@@ -40,7 +35,7 @@
   {{- if ($.Scratch.Get "parentStr") -}}
     {{- $parentStr := substr ($.Scratch.Get "parentStr") 0 -1 -}}
     {{- $splitted := (split $parentStr ",") | uniq -}}
-    , "parentList" : [
+    , "parents" : [
     {{- range $splindex, $spl := $splitted -}}
       {{- printf "%s%s%s" "\"" $spl "\"" -}}{{- if ne (add $splindex 1) (len $splitted) -}},{{- end -}}
     {{- end -}}
@@ -51,4 +46,4 @@
 
   {{- $.Scratch.Add "count" 1}}
 {{- end -}}
-}
+]

@@ -1,0 +1,26 @@
+{{- $taxList := .taxList -}}
+{{- $currentKey := .key -}}
+{{- $scratch := .scratch -}}
+
+
+{{- $scratch.Set $currentKey slice -}}
+{{- range $key, $tax := $taxList -}}
+  {{- if in $tax.children $currentKey -}}
+    {{/*- printf "%s%s%s" "\"{{- $key -}}\" : {\"name\" : \"{{- $tax.name -}}\",\"parents\" : {" (partial "taxonomy-parent-tree.json" (dict "taxList" $taxList "key" $key)) "}}" -*/}}
+    {{- $scratch.Set $key (dict "key" $key "name" $tax.name) -}}
+    {{- $scratch.Add $currentKey ($scratch.Get $key) -}}
+
+  {{- end -}}
+{{- end -}}
+
+{{- range $sindex, $someting := ($scratch.Get $currentKey) -}}
+  "{{- $someting.key -}}" : {
+    "name": "{{- $someting.name -}}"
+    {{- $parents := partial "taxonomy-parent-tree.json" (dict "taxList" $taxList "key" $someting.key "scratch" $scratch) -}}
+    {{- if $parents -}},
+      "parents": {
+      {{- $parents -}}
+      }
+    {{- end -}}
+  }{{- if ne (add $sindex 1) (len ($scratch.Get $currentKey)) -}},{{- end -}}
+{{- end -}}

@@ -9,6 +9,7 @@ taxonomies:
     - stone_chemicals
     - laminating_mitering
     - test
+    - cutting_blades
   adapters:
     name: Adapters
   bearings:
@@ -61,6 +62,8 @@ taxonomies:
     name: Oscillating Head System
 
   machineparts:
+    root: true
+    root_weight: 35
     name: Machine Parts
 
   test:
@@ -74,3 +77,5 @@ taxonomies:
     name: Another2
   another3:
     name: Another3
+  rootless:
+    name: Rootless

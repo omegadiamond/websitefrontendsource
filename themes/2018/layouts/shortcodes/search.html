@@ -23,7 +23,7 @@
 
 <div class="mdl-grid" id="app">
     <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--3-col-tablet mdl-cell--3-col-desktop" style="background-color: #f8f8f8; padding: 5px;">
-        <aside>
+        <aside v-if="categories">
             <!--[[ categories ]]-->
             <ul v-for="(cat, index) in categories">
                 <category :model="cat" class="category"></category>
@@ -96,16 +96,16 @@
     Vue.component('category', {
         template: '#category-template',
         props: {
-            model: Object
+            model: Object,
         },
         data: function () {
             return {
-                open: true
+                open: false
             }
         },
         computed: {
             isFolder: function () {
-                return this.model.children && this.model.children.length;
+                return this.model.children && Object.keys(this.model.children).length;
             }
         },
         methods: {
@@ -117,7 +117,7 @@
         }
     });
 
-    var categories = new Vue({
+    var app = new Vue({
         router,
         el: '#app',
         data: {
@@ -128,18 +128,18 @@
         },
         mounted() {
             axios.get(urlCategoriesTree).then(response => {
-                this.categoryTree = response.data.sort(function (a, b) {
+                /*this.categoryTree = response.data.sort(function (a, b) {
                     return a.weight - b.weight;
-                });
+                });*/
             });
-            axios.get(urlCategoriesList).then(response => {
-                this.categoryList = response.data.sort(function (a, b) {
-                    return a.weight - b.weight;
-                });
-                this.search();
+            axios.get(urlCategoriesTree).then(response => {
+                this.categories = response.data;
+                //this.search();
+                console.log(this.categories.tooling.children.edge_shaping.children.cup_wheels.children.test.name);
             });
             axios.get(urlProducts).then(response => {
                 this.products = response.data;
+                //this.search();
             });
         },
         methods: {
@@ -154,6 +154,7 @@
                     });
                 }
                 if (category) {
+                    console.log('Category:', category);
                     this.categories = this.categoryTree.filter(function (cat) {
                         if (category === cat.key) {
                             return true;

@@ -1,6 +1,1 @@
-{{ $count := .count }}
-
-{{ $count }}
-{{ if (lt $count 5) }}
-    {{ partial "TEST.html" (dict "count" (add $count 1)) }}
-{{ end }}
+{{- "testing file" -}}
