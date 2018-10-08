@@ -33,23 +33,55 @@
 
     <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--5-col-tablet mdl-cell--9-col-desktop">
         <div class="mdl-grid">
-            <div v-for="(product, index) in products" class="mdl-cell mdl-cell--12-col mdl-cell--6-col-desktop">
-                <div class="mdl-card mdl-shadow--4dp">
-                    <div class="mdl-card__title">
+            <div v-for="(product, sku) in products" class="mdl-cell mdl-cell--12-col mdl-cell--6-col-desktop">
+
+                <!-- product card -->
+                <article class="mdl-card mdl-shadow--4dp omg-card-product">
+                    <section class="mdl-card__title">
                         <a :href="product.permalink">
-                            <h2>[[ product.title ]] | [[ product.sku ]]</h2>
+                            <h3 class="mdl-card__title-text">[[ product.title ]] | [[ sku ]]</h3>
                         </a>
-                    </div>
-                    <div class="mdl-card__media" v-if="product.image">
-                        <img :src="product.image" :alt="product.title">
-                    </div>
-                    <div class="mdl-card__supporting-text">
+                    </section>
+
+                    <section v-if="product.image" class="mdl-card__media">
+                        <a :href="product.permalink">
+                            <img :src="product.image" :alt="product.title">
+                        </a>
+                    </section>
+
+                    <section class="mdl-card__supporting-text">
                         [[ product.description ]]
-                        <!--<div v-for="tax in product.taxonomies">
-                            [[ tax ]]<br>
-                        </div>-->
-                    </div>
-                </div>
+                        <hr>
+                        <div v-for="(tax, tindex) in product.taxonomies">
+                            [[ tindex ]]: [[ tax ]]<br>
+                        </div>
+                    </section>
+
+                    <!-- actions -->
+                    <section class="mdl-card__actions mdl-card--border">
+                        <strong class="omg-card-price">$4,321.00</strong>
+
+                        <div>
+                            <!-- share btn -->
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--accent" :id="'sh_'+[[ sku ]]" title="Share">
+                                <i class="material-icons">share</i>
+                            </button>
+                            <ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect"
+                                :for="'sh_'+[[ sku ]]">
+                                <li class="mdl-menu__item"><a href="#">Facebook</a> </li>
+                                <li class="mdl-menu__item"><a href="#">Google +</a> </li>
+                                <li class="mdl-menu__item"><a href="#">Copy Link</a> </li>
+                            </ul>
+
+                            <!-- add to cart btn -->
+                            <a class="mdl-button mdl-js-button mdl-button&#45;&#45;icon mdl-js-ripple-effect mdl-button&#45;&#45;accent" title="Add to Cart">
+                                <i class="material-icons">add_shopping_cart</i>
+                            </a>
+                            <!--<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent" title="Add to Cart">Add to Cart</button>-->
+                        </div>
+                    </section><!-- actions -->
+                </article><!-- product card -->
+
             </div>
         </div>
     </div>
@@ -60,7 +92,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<!--<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
 <script type="text/x-template" id="category-template">
     <li>
@@ -83,10 +115,10 @@
 </script>
 <script>
     Vue.options.delimiters = ['[[', ']]'];
-    var router = new VueRouter({
+    /*var router = new VueRouter({
         mode: 'history',
         routes: []
-    });
+    });*/
 
     const urlCategoriesTree = '{{ $.Site.BaseURL }}taxonomytree.json';
     const urlCategoriesList = '{{ $.Site.BaseURL }}taxonomylist.json';
@@ -118,7 +150,7 @@
     });
 
     var app = new Vue({
-        router,
+        // router,
         el: '#app',
         data: {
             categories: null,
@@ -135,7 +167,7 @@
             axios.get(urlCategoriesTree).then(response => {
                 this.categories = response.data;
                 //this.search();
-                console.log(this.categories.tooling.children.edge_shaping.children.cup_wheels.children.test.name);
+                //console.log(this.categories.tooling.children.edge_shaping.children.cup_wheels.children.test.name);
             });
             axios.get(urlProducts).then(response => {
                 this.products = response.data;

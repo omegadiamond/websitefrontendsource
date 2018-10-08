@@ -18,7 +18,7 @@
     "name": "{{- $someting.name -}}"
     {{- $parents := partial "taxonomy-parent-tree.json" (dict "taxList" $taxList "key" $someting.key "scratch" $scratch) -}}
     {{- if $parents -}},
-      "parents": {
+      "parent": {
       {{- $parents -}}
       }
     {{- end -}}

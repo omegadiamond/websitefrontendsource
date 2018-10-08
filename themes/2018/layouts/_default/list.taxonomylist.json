@@ -19,7 +19,7 @@
 
   {{- $parents := partial "taxonomy-parent-tree.json" (dict "taxList" $taxList "key" $rootKey "scratch" $.Scratch) -}}
   {{- if $parents -}}
-    , "parents" : {
+    , "parent" : {
       {{- $parents -}}
     }
   {{- end -}}

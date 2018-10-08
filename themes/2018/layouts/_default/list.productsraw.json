@@ -1,10 +1,27 @@
 {{- $.Scratch.Set "productsRaw" slice -}}
 
 {{- range $products := where .Sections "Section" "products" -}}
-{{- range $p := .Sections -}}
-  {{- $sku := index (split .Dir "/") 1}}
-  {{- $.Scratch.Add "productsRaw" (dict "sku" $sku "permalink" .Permalink "title" .Title "description" .Description "image" .Params.image "taxonomies" .Params.taxonomies "date" .Date "content" .Content) -}}
-{{- end -}}
+  {{- range $p := .Sections -}}
+    {{- $sku := index (split .Dir "/") 1}}
+    {{- $.Scratch.Add "productsRaw" (dict "sku" $sku "permalink" .Permalink "title" .Title "description" .Description "image" .Params.image "taxonomies" .Params.taxonomies "date" .Date "content" .Content) -}}
+  {{- end -}}
 {{- end -}}
 
-{{- $.Scratch.Get "productsRaw" | jsonify -}}
+{
+{{- range $index, $p := ($.Scratch.Get "productsRaw") -}}
+  {{- $p.sku | jsonify -}}: {
+    "title": {{- $p.title | jsonify -}},
+    "permalink": {{- $p.permalink | jsonify -}},
+    "description": {{- $p.description | jsonify -}},
+    "image": {{- if $p.image -}}{{- $p.image | jsonify -}}{{- else -}}""{{- end -}},
+    "taxonomies": {
+      {{- range $tindex, $t := $p.taxonomies -}}
+        {{- $t.key | jsonify -}}: {{- if $t.weight -}}{{- $t.weight | jsonify -}}{{- else -}}-1{{- end -}}
+        {{- if ne (add $tindex 1) (len $p.taxonomies) -}},{{- end -}}
+      {{- end -}}
+    },
+    "date": {{- $p.date | jsonify -}},
+    "content": {{- $p.content | jsonify -}}
+  }{{- if ne (add $index 1) (len ($.Scratch.Get "productsRaw")) -}},{{- end -}}
+{{- end -}}
+}
