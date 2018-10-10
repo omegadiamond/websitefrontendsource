@@ -5,6 +5,7 @@ image: /products/IMG_2092.jpg
 sellable: false
 taxonomies: 
     - key: accessories
+    - key: another2
 images: 
     - title:
       url: /products/IMG_2092.jpg

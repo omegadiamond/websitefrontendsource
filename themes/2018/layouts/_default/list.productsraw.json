@@ -10,6 +10,7 @@
 {
 {{- range $index, $p := ($.Scratch.Get "productsRaw") -}}
   {{- $p.sku | jsonify -}}: {
+    "sku": {{- $p.sku | jsonify -}},
     "title": {{- $p.title | jsonify -}},
     "permalink": {{- $p.permalink | jsonify -}},
     "description": {{- $p.description | jsonify -}},

@@ -5,7 +5,7 @@ image: /products/IMG_9280_8 inch Blade (web).jpg
 featured: false
 sellable: false
 taxonomies: 
-    - key: test
+    - key: blades
       weight: 56
 images: 
     - title:
@@ -17,6 +17,7 @@ images:
 related: 
 date: 2018-09-13T16:51:11-07:00
 draft: false
+bladediamter: 14
 ---
 
 These diamond blades are the most advanced diamond blades we sell. They have diamonds arrayed in a specific pattern in each segment (see the Image Gallery below for a detail of this pattern). A big advantage with arrayed technology is that the outer edge wears flat or even concave, this (non rounding edge) keeps the blades tracking truer so they don't cut right or left as they wear like traditional blades can. The evenly balanced cutting action provides a fast, smooth cut; and because the patterned diamonds are exposed to the stone at the same consistent rate as all the other diamonds in each segment, the blade life is greatly extended - 30% longer blade-life than traditional blades. There is no uneven segment deterioration or premature diamond loss, which radically helps to reduce chipping. You will love these blades!

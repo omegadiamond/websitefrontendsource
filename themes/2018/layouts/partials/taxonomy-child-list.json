@@ -1,14 +1,15 @@
 {{- $taxList := .taxList -}}
-{{- $category := .category -}}
+{{- $children := .children -}}
 
-{{- range $key, $tax := $taxList -}}
-{{- if (in $tax.children $category) -}}
-{{- printf "%s%s" $key "," -}}
+{{- if $children -}}
+  {{- range $index, $child := $children -}}
 
-{{- $partial := partial "taxonomy-child-list.json" (dict "taxList" $taxList "category" $key) -}}
-{{- if $partial -}}
-{{- $partial -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
+    {{- $tax := index $taxList $child -}}
+    {{- if $tax -}}
+      {{- printf "%s%s" $child "," -}}
 
+      {{- partial "taxonomy-child-list.json" (dict "children" $tax.children "taxList" $taxList) -}}
+
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

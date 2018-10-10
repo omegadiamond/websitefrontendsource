@@ -5,21 +5,33 @@
 {{- range $rootKey, $tax := $taxList -}}
 
   "{{- $rootKey -}}" : {
+  "key": {{- $rootKey | jsonify -}},
   "name": "{{- $tax.name -}}"
   {{- if $tax.root -}}, "root": {{- $tax.root -}}{{- end -}}
   {{- if $tax.root_weight -}}, "weight": {{- $tax.root_weight -}}{{- end -}}
-    {{- if $tax.children -}}
-      , "childList": [
-      {{- range $chindex, $child := $tax.children -}}
-        "{{- $child -}}"{{- if ne (add $chindex 1) (len $tax.children) -}},{{- end -}}
+  {{- if $tax.children -}}
+
+    , "childList": [
+      {{- $.Scratch.Set "childStr" "" -}}
+      {{- $cPartial := partial "taxonomy-child-list.json" (dict "children" $tax.children "taxList" $taxList) -}}
+      {{- if $cPartial -}}
+        {{- $.Scratch.Add "childStr" $cPartial -}}
       {{- end -}}
-      ], "children" :
-      {{- partial "taxonomy-child-tree.json" (dict "children" $tax.children "taxList" $taxList) -}}
-    {{- end -}}
+
+      {{- if ($.Scratch.Get "childStr") -}}
+        {{- $childStr := substr ($.Scratch.Get "childStr") 0 -1 -}}
+        {{- $childArr := (split $childStr ",") | uniq -}}
+        {{- range $cindex, $ch := $childArr -}}
+          {{- $ch | jsonify -}}{{- if ne (add $cindex 1) (len $childArr) -}},{{- end -}}
+        {{- end -}}
+      {{- end -}}
+    ], "children" :
+    {{- partial "taxonomy-child-tree.json" (dict "children" $tax.children "taxList" $taxList) -}}
+  {{- end -}}
 
   {{- $parents := partial "taxonomy-parent-tree.json" (dict "taxList" $taxList "key" $rootKey "scratch" $.Scratch) -}}
   {{- if $parents -}}
-    , "parent" : {
+    , "parents" : {
       {{- $parents -}}
     }
   {{- end -}}
@@ -29,7 +41,7 @@
     {{- if (in $tax2.children $rootKey) -}}
 
       {{- $.Scratch.Add "parentStr" (printf "%s%s" $key2 ",") -}}
-      {{- $partial := partial "taxonomy-child-list.json" (dict "taxList" $taxList "category" $key2) -}}
+      {{- $partial := partial "taxonomy-parent-list.json" (dict "taxList" $taxList "category" $key2) -}}
       {{- if $partial -}}
         {{- $.Scratch.Add "parentStr" $partial -}}
       {{- end -}}
@@ -42,7 +54,7 @@
     {{- $splitted := (split $parentStr ",") | uniq -}}
     , "parentList" : [
     {{- range $splindex, $spl := $splitted -}}
-      {{- printf "%s%s%s" "\"" $spl "\"" -}}{{- if ne (add $splindex 1) (len $splitted) -}},{{- end -}}
+      {{- $spl | jsonify -}}{{- if ne (add $splindex 1) (len $splitted) -}},{{- end -}}
     {{- end -}}
     ]
   {{- end -}}

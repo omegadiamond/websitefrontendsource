@@ -34,6 +34,10 @@ taxonomies:
     name: Large Format Porcelain Panel
   cutting_blades:
     name: Cutting Blades
+    filters:
+      -
+        name: Blade Size
+        key: bladediameter
     children:
       - core_drills
   core_drills:

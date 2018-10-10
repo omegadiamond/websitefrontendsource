@@ -1,0 +1,198 @@
+<style>
+    /* categories */
+    .category {
+        cursor: pointer;
+    }
+    ul {
+        padding-left: 1em;
+        line-height: 1.5em;
+        list-style-type: dot;
+        margin: 0;
+    }
+</style>
+
+<div class="mdl-grid" id="app">
+    <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--3-col-tablet mdl-cell--3-col-desktop" style="background-color: #f8f8f8; padding: 5px;">
+        <aside v-if="categories">
+            <!--[[ categories ]]-->
+            <ul v-for="(cat, index) in categories">
+                <category :model="cat" class="category"></category>
+            </ul>
+        </aside>
+    </div>
+
+    <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--5-col-tablet mdl-cell--9-col-desktop">
+        <div class="mdl-grid">
+            <div v-for="(product, sku) in products" class="mdl-cell mdl-cell--12-col mdl-cell--6-col-desktop">
+
+                <!-- product card -->
+                <article class="mdl-card mdl-shadow--4dp omg-card-product">
+                    <section class="mdl-card__title">
+                        <a :href="product.permalink">
+                            <h3 class="mdl-card__title-text">[[ product.title ]] | [[ sku ]]</h3>
+                        </a>
+                    </section>
+
+                    <section v-if="product.image" class="mdl-card__media">
+                        <a :href="product.permalink">
+                            <img :src="product.image" :alt="product.title">
+                        </a>
+                    </section>
+
+                    <section class="mdl-card__supporting-text">
+                        [[ product.description ]]
+                        <hr>
+                        <div v-for="(tax, tindex) in product.taxonomies">
+                            [[ tindex ]]: [[ tax ]]<br>
+                        </div>
+                    </section>
+
+                    <!-- actions -->
+                    <section class="mdl-card__actions mdl-card--border">
+                        <strong class="omg-card-price">$4,321.00</strong>
+
+                        <div>
+                            <!-- share btn -->
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--accent" :id="'sh_'+[[ sku ]]" title="Share">
+                                <i class="material-icons">share</i>
+                            </button>
+                            <ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect"
+                                :for="'sh_'+[[ sku ]]">
+                                <li class="mdl-menu__item"><a href="#">Facebook</a> </li>
+                                <li class="mdl-menu__item"><a href="#">Google +</a> </li>
+                                <li class="mdl-menu__item"><a href="#">Copy Link</a> </li>
+                            </ul>
+
+                            <!-- add to cart btn -->
+                            <a class="mdl-button mdl-js-button mdl-button&#45;&#45;icon mdl-js-ripple-effect mdl-button&#45;&#45;accent" title="Add to Cart">
+                                <i class="material-icons">add_shopping_cart</i>
+                            </a>
+                            <!--<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent" title="Add to Cart">Add to Cart</button>-->
+                        </div>
+                    </section><!-- actions -->
+                </article><!-- product card -->
+
+            </div><!-- .mdl-cell for product -->
+        </div><!-- .mdl-grid -->
+    </div> <!-- .mdl-cell for products -->
+</div> <!-- #app .mdl-grid -->
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<!--<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+
+<!-- Category Template -->
+<script type="text/x-template" id="category-template">
+    <li>
+        <div @click="toggle">
+            [[ model.name ]]
+            <span v-if="isFolder">
+                [ [[ open ? '-' : '+' ]] ]
+                <!--<i class="material-icons" v-if="open">remove</i>
+                <i class="material-icons" v-if="!open">add</i>-->
+            </span>
+        </div>
+        <ul v-show="open" v-if="isFolder">
+            <category class="category"
+                      v-for="(model, index) in model.children"
+                      :key="index"
+                      :model="model">
+            </category>
+        </ul>
+    </li>
+</script><!-- category template -->
+
+<!-- main script -->
+<script>
+    Vue.options.delimiters = ['[[', ']]'];
+    /*var router = new VueRouter({
+        mode: 'history',
+        routes: []
+    });*/
+
+    const urlCategoriesTree = '{{ $.Site.BaseURL }}taxonomytree.json';
+    const urlCategoriesList = '{{ $.Site.BaseURL }}taxonomylist.json';
+    const urlProducts = '{{ $.Site.BaseURL }}productsraw.json';
+    /*console.log(urlCategoriesList);*/
+
+    /* Category Component */
+    Vue.component('category', {
+        template: '#category-template',
+        props: {
+            model: Object,
+        },
+        data: function () {
+            return {
+                open: false
+            }
+        },
+        computed: {
+            isFolder: function () {
+                return this.model.children && Object.keys(this.model.children).length;
+            }
+        },
+        methods: {
+            toggle: function () {
+                if (this.isFolder) {
+                    this.open = !this.open;
+                }
+            }
+        }
+    });
+
+    /* App Component */
+    var app = new Vue({
+        // router,
+        el: '#app',
+        data: {
+            categories: null,
+            categoryTree: null,
+            products: null,
+        },
+        mounted() {
+            axios.get(urlCategoriesTree).then(response => {
+                /*this.categoryTree = response.data.sort(function (a, b) {
+                    return a.weight - b.weight;
+                });*/
+            });
+            axios.get(urlCategoriesTree).then(response => {
+                this.categories = response.data;
+                //this.search();
+                //console.log(this.categories.tooling.children.edge_shaping.children.cup_wheels.children.test.name);
+            });
+            axios.get(urlProducts).then(response => {
+                this.products = response.data;
+                //this.search();
+            });
+        },
+        methods: {
+            search: function () {
+                let search = this.$route.query.search;
+                let category = this.$route.query.category;
+                if (search) {
+                    this.products = this.products.filter(function (p) {
+                        if (_.includes(p.sku, search) || _.includes(p.title, search) || _.includes(p.description) || _.includes(p.content, search)) {
+                            return p;
+                        }
+                    });
+                }
+                if (category) {
+                    console.log('Category:', category);
+                    this.categories = this.categoryTree.filter(function (cat) {
+                        if (category === cat.key) {
+                            return true;
+                        }
+                    });
+                    this.test(category);
+                }
+            },
+            test: function (element) {
+
+            }
+        }
+    });
+</script><!-- main script -->

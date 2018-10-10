@@ -1,0 +1,13 @@
+{{- $taxList := .taxList -}}
+{{- $category := .category -}}
+
+{{- range $key, $tax := $taxList -}}
+  {{- if (in $tax.children $category) -}}
+    {{- printf "%s%s" $key "," -}}
+
+    {{- $partial := partial "taxonomy-parent-list.json" (dict "taxList" $taxList "category" $key) -}}
+    {{- if $partial -}}
+      {{- $partial -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
