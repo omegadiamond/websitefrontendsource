@@ -5,7 +5,7 @@ image: /products/IMG_9280_8 inch Blade (web).jpg
 featured: false
 sellable: false
 taxonomies: 
-    - key: blades
+    - key: cutting_blades
       weight: 56
 images: 
     - title:

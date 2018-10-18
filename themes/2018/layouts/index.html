@@ -1,6 +1,6 @@
 {{ partial "header.html" . }}
 
-<!--
+
 {{/* ROOT ARRAY */}}
 {{ range $rootKey, $tax := .Site.Data.taxonomies.taxonomies }}
     {{ if (eq .root true) }} {{/* if not (eq .root false) */}}
@@ -53,7 +53,7 @@
             {{ end }}
         {{ end }}
     {{ end }}
-{{ end }}-->
+{{ end }}
 
 
 <div class="mdl-grid">
@@ -63,7 +63,7 @@
         {{ .Content }}
     </div>
 
-    <!--{{ range $product := .Sections }}
+    {{ range $product := .Sections }}
         {{ if $product.Params.taxonomies }}
             {{ $sku := index (split .Dir "/") 1}}
             {{ $.Scratch.SetInMap $sku "sku" $sku }}
@@ -81,7 +81,7 @@
             {{ end }}
             {{ $.Scratch.Delete $sku }}
         {{ end }}
-    {{ end }}-->
+    {{ end }}
 {{ end }}
 
 

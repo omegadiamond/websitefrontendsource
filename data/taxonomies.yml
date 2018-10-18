@@ -65,10 +65,17 @@ taxonomies:
   oscillating_head_system:
     name: Oscillating Head System
 
-  machineparts:
+  machines:
     root: true
-    root_weight: 35
-    name: Machine Parts
+    root_weight: 18
+    name: Machines
+    children:
+      - all_upgrade_kits
+      - all_replacement_parts
+  all_upgrade_kits:
+    name: All Upgrade Kits
+  all_replacement_parts:
+    name: All Replacement Parts
 
   test:
     root: true

@@ -7,7 +7,7 @@
         {{ .Content }}
     </div>
 
-{{ range $index, .Sections }}
+{{ range $index, $sections := .Sections }}
     <div class="mdl-cell">
         <article class="mdl-card mdl-shadow&#45;&#45;4dp omg-card-product">
             <section class="mdl-card__title">

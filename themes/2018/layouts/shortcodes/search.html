@@ -9,11 +9,6 @@
     }
     .category-aside{
     }
-    .category-title{
-        font-size: 2rem;
-        margin: 0;
-        padding-bottom: 5px;
-    }
     .category-list{
         margin: 0;
     }
@@ -46,11 +41,14 @@
     <!-- sm-nav -->
     <div class="mdl-cell mdl-cell--12-col sm-nav">
         <div class="breadcrumb">
-            <a v-on:click="reset()">All Products</a>
+            <a v-on:click.stop.prevent="reset()">All Products</a>
             <template v-if="breadcrumb.length"> > </template>
             <template v-if="breadcrumb.length" v-for="(crumb, index) in breadcrumb">
-                <a v-on:click="crumbClick(crumb, index)">[[ categories[crumb].name ]]</a>
+                <a v-on:click.stop.prevent="crumbClick(crumb, index)">[[ categories[crumb].name ]]</a>
                 <template v-if="index + 1 !== breadcrumb.length"> > </template>
+            </template>
+            <template v-if="search">
+                > Search Results: "[[ search ]]"
             </template>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label sortby">
@@ -131,6 +129,10 @@
                 </article><!-- product card -->
 
             </div><!-- .mdl-cell for product -->
+
+            <div v-if="!filteredProducts || (filteredProducts && filteredProducts.length < 1)" class="mdl-cell mdl-cell--12-col">
+                No Products found...
+            </div>
         </div><!-- .mdl-grid -->
     </div> <!-- .mdl-cell for products -->
 </div> <!-- #app .mdl-grid -->
@@ -164,64 +166,55 @@
             filteredCategories: null,
             products: null,
             filteredProducts: null,
-            sort: '{"taxonomies.featured": "asc", "date": "desc"}',
+            sort: null,
+            search: '',
             breadcrumb: []
         },
         mounted() {
-            axios.get(urlCategoriesList).then(response => {
+            const getCats = axios.get(urlCategoriesList).then(response => {
                 this.categories = response.data;
-                this.filterCategories(null);
-            });
-            axios.get(urlProducts).then(response => {
+                this.categories['featured'] = {key: 'featured', name: 'Featured'};
+            }).catch(err => console.error('Error getting categories', err));
+            const getProds = axios.get(urlProducts).then(response => {
                 this.products = response.data;
-                this.filterProducts();
-                //this.search();
-            });
+            }).catch(err => console.error('Error getting products', err));
+            Promise.all([getCats, getProds]).then(resolve => {
+                this.onRouteChange();
+            }).catch(err => console.error('Error getting data', err));
+        },
+        watch: {
+            $route (to, from) {
+                console.log('...route changed');
+                this.onRouteChange();
+            }
         },
         methods: {
-            filterCategories(category) {
-                if (category) {
-                    this.filterProducts();
-                }
-                this.filteredCategories = _.pickBy(this.categories, function (c, key) {
-                    if (category) return _.includes(c.parentList, category);
-                    else return c.root;
-                })
+            routePush() {
+                console.log('...route pushed');
+                this.$router.push('/search/?search=' + this.search + '&sort=' + this.sort + '&category=' + this.breadcrumb + '&featured=' + this.featured);
             },
-            reset(){
-                this.filterCategories(null);
-                // this.sort = '{"taxonomies.featured": "asc", "date": "desc"}';
-                this.breadcrumb = [];
+            onRouteChange() {
+                console.log('...onRouteChange');
+                // console.log('onRouteChange:', this.$route.query);
+                this.sort = this.$route.query.sort || '{"taxonomies.featured": "asc", "date": "desc"}';
+                this.search = this.$route.query.search || '';
+
+
+                let category = this.$route.query.category;
+                if (category) {
+                    const cats = category.split(',');
+                    if (this.categories[cats[cats.length - 1]]) {
+                        this.breadcrumb = cats;
+                    }
+                }
+
+                this.filterCategories(_.last(this.breadcrumb));
                 this.filterProducts();
             },
-            filterProducts() {
-                let toFilterProducts = {};
-                if (this.breadcrumb.length) {
-                    let selectedCat = this.categories[_.last(this.breadcrumb)];
-                    console.log(selectedCat);
-                    toFilterProducts = _.pickBy(this.products, function (p, key) {
 
-                        let taxonomyArr = [];
-                        _.forEach(p.taxonomies, function (t, tKey) {
-                            taxonomyArr.push(tKey);
-                        });
-
-                        let inter = _.intersection(taxonomyArr, selectedCat.childList);
-                        return inter.length > 0 || p.taxonomies[selectedCat.key];
-                    });
-                } else {
-                    toFilterProducts = this.products;
-                }
-
-                let sortBy = JSON.parse(this.sort);
-                this.filteredProducts = _.orderBy(toFilterProducts, _.keys(sortBy), _.values(sortBy));
-            },
-            sortProducts() {
-                let sortBy = JSON.parse(this.sort);
-                this.filteredProducts = _.orderBy(this.filteredProducts, _.keys(sortBy), _.values(sortBy));
-            },
             categoryClick(category){
                 this.breadcrumb.push(category);
+                this.routePush();
                 this.filterCategories(category);
             },
             crumbClick(category, index) {
@@ -229,29 +222,63 @@
                     this.breadcrumb = this.breadcrumb.splice(0, index+1);
                     this.filterCategories(category);
                 }
+                this.routePush();
             },
-            search: function () {
-                let search = this.$route.query.search;
-                let category = this.$route.query.category;
-                if (search) {
-                    this.products = this.products.filter(function (p) {
-                        if (_.includes(p.sku, search) || _.includes(p.title, search) || _.includes(p.description) || _.includes(p.content, search)) {
+            filterCategories(category) {
+                this.filteredCategories = _.pickBy(this.categories, function (c, key) {
+                    if (category) return _.includes(c.parentList, category);
+                    else return c.root;
+                });
+            },
+
+            filterProducts() {
+                console.log('...filterProducts');
+                // get by category
+                if (this.breadcrumb.length) {
+                    let selectedCat = this.categories[_.last(this.breadcrumb)];
+                    if (selectedCat) {
+                        this.filteredProducts = _.pickBy(this.products, function (p, key) {
+
+                            let taxonomyArr = [];
+                            _.forEach(p.taxonomies, function (t, tKey) {
+                                taxonomyArr.push(tKey);
+                            });
+
+                            let inter = _.intersection(taxonomyArr, selectedCat.childList);
+                            return inter.length > 0 || p.taxonomies[selectedCat.key];
+                        });
+                    }
+                } else {
+                    this.filteredProducts = this.products;
+                }
+
+                // search
+                if (this.search) {
+                    const searchStr = this.search.toLowerCase();
+                    this.filteredProducts = _.filter(this.filteredProducts, function (p) {
+                        /*  || _.includes(p.content.toLowerCase(), searchStr) */
+                        if (_.includes(_.lowerCase(p.sku), searchStr) || _.includes(_.lowerCase(p.title), searchStr) || _.includes(_.lowerCase(p.description), searchStr)) {
                             return p;
                         }
-                    });
+                    })
                 }
-                if (category) {
-                    console.log('Category:', category);
-                    this.categories = this.categoryTree.filter(function (cat) {
-                        if (category === cat.key) {
-                            return true;
-                        }
-                    });
-                    this.test(category);
-                }
-            },
-            test: function (element) {
 
+                let sortBy = JSON.parse(this.sort);
+                this.filteredProducts = _.orderBy(this.filteredProducts, _.keys(sortBy), _.values(sortBy));
+            },
+            sortProducts() {
+                let sortBy = JSON.parse(this.sort);
+                this.filteredProducts = _.orderBy(this.filteredProducts, _.keys(sortBy), _.values(sortBy));
+
+                this.routePush();
+            },
+
+            reset(){
+                this.filterCategories(null);
+                this.sort = '{"taxonomies.featured": "asc", "date": "desc"}';
+                this.search = '';
+                this.breadcrumb = [];
+                this.routePush();
             }
         }
     });

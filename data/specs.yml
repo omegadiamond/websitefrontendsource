@@ -1,0 +1,14 @@
+specs:
+  cut_speed:
+    name: Cut Speed
+    values:
+      - Up to 4 FPM
+      - Up to 10 FPM
+  motor_installed:
+    name: Motor Installed
+    values:
+      - yes
+      - no
+  motor_cool
+  motor:
+    name: Motor

@@ -1,5 +1,6 @@
 ---
 title: Red Ripper Ultralight™ Stone Router
+url: /015-764
 description: ""
 image: https://omegadiamond.com/system/files/imagecache/product_full/images/products/IMG_6600%28web%29.jpg
 sellable: false
