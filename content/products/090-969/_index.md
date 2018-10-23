@@ -7,20 +7,27 @@ date: 2018-10-18T11:46:10-07:00
 sellable: true
 draft: false
 images: 
-    - title:
-      url: /products/...
+    - title: 
+      url: 
 attachments:
     - title:
       url: 
-specs: 
-    - key: 
-      value: 
 taxonomies: 
     - key: featured
       weight: 10
     - key: machines
       weight: 8
-related: 
+specs: 
+    - key: Cut Speed
+      value: Up to 10 FPM
+    - key: Motor Installed
+      value: yes
+    - key: Motor Cooling
+      value: water
+    - key: Motor
+      value: 8100 RPM
+    - key: Fit Blades
+      value: Up to 14-1/2" (368mm)
 ---
 
 The Blue Ripper Miter Master™ Rail Saw creates a perfectly mitered edge by cutting both 45 degree angles simultaneously. The Blue Ripper Miter Master™ comes with two free blades. Call to order, and don't forget to choose your blades!

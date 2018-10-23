@@ -1,11 +1,11 @@
 ---
-title:
-url: /{{ index (split .Dir "/") 1 }}
-description: ""
+title: 
+url: /test
+description: 
 image: 
-date: {{ .Date }}
-draft: false
+date: 2018-10-19T09:42:32-07:00
 sellable: true
+draft: false
 images: 
     - title:
       url: /products/...
@@ -16,7 +16,10 @@ specs:
     - key: 
       value: 
 taxonomies: 
-    - key: 
+    - key: test
       weight: 0
 related: 
+specs:
+    - key: Motor Installed
+    - value:
 ---

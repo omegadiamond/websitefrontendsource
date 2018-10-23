@@ -1,0 +1,34 @@
+
+<!-- product card -->
+<article class="mdl-card mdl-shadow--4dp omg-card-product">
+    <section class="mdl-card__title">
+        <a href="{{ .permalink }}">
+            <h3 class="mdl-card__title-text">{{ .title }}</h3>
+        </a>
+    </section>
+
+    {{ if .image}}
+    <section class="mdl-card__media">
+        <a href="{{ .permalink }}">
+            <img src="{{ .image }}" alt="Card Example">
+        </a>
+    </section>
+    {{ end }}
+
+    <section class="mdl-card__supporting-text">
+        {{ .description }}
+    </section>
+
+    <!-- actions -->
+    <section class="mdl-card__actions mdl-card--border">
+        <strong class="omg-card-price">$4,321.00</strong>
+
+        <div>
+            <!-- add to cart -->
+            <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-button--accent" href="#" title="Add to Cart">
+                <i class="material-icons">add_shopping_cart</i>
+            </a>
+            <!--<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent" title="Add to Cart">Add to Cart</button>-->
+        </div>
+    </section><!-- actions -->
+</article><!-- product card -->

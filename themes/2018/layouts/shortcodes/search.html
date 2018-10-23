@@ -7,8 +7,6 @@
     .category-cell{
         background-color: #f8f8f8;
     }
-    .category-aside{
-    }
     .category-list{
         margin: 0;
     }
@@ -65,12 +63,28 @@
 
     <!-- category-cell -->
     <div class="mdl-cell mdl-cell--12-col-phone mdl-cell--3-col-tablet mdl-cell--3-col-desktop category-cell">
-        <aside v-if="categories" class="category-aside">
-            <ul class="mdl-list category-list">
+        <aside>
+            <!-- categories -->
+            <ul v-if="categories" class="mdl-list category-list">
                 <li class="mdl-list__item" v-for="(category, index) in filteredCategories">
                     <a v-on:click.stop.prevent="categoryClick(index)">[[ category.name ]]</a>
                 </li>
-            </ul>
+            </ul><!-- categories -->
+
+            <!-- specs -->
+            <div v-if="specs" v-for="(spec, key) in specs">
+                <ul class="mdl-list">
+                    <li class="mdl-list__item">[[ key ]]: [[ spec.qty ]]</li>
+                    <li class="mdl-list__item" v-for="(checked, value) in spec.values">
+                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                            <input type="checkbox" class="mdl-checkbox__input"
+                                :checked="checked"
+                                v-on:change="specChanged(key, value, checked, $event)">
+                            [[ value ]]
+                        </label>
+                    </li>
+                </ul>
+            </div> <!-- specs -->
 
             <!--<a v-on:click.stop.prevent="reset()">Reset</a>-->
         </aside>
@@ -100,7 +114,10 @@
                         <div v-for="(tax, tindex) in product.taxonomies">
                             <strong>[[ tindex ]]: [[ tax ]]</strong><br>
                         </div>
-                        <hr> [[ product.date ]]
+                        <hr>
+                        <div v-for="(value, name) in product.specs">
+                            [[ name ]]: [[ value ]]<br>
+                        </div>
                     </section>
 
                     <!-- actions -->
@@ -138,8 +155,6 @@
 </div> <!-- #app .mdl-grid -->
 
 
-
-
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
@@ -166,39 +181,46 @@
             filteredCategories: null,
             products: null,
             filteredProducts: null,
+            specs: null,
+            searchSpecs: {},
             sort: null,
             search: '',
             breadcrumb: []
         },
         mounted() {
             const getCats = axios.get(urlCategoriesList).then(response => {
-                this.categories = response.data;
-                this.categories['featured'] = {key: 'featured', name: 'Featured'};
+                if (typeof response.data === 'object') {
+                    this.categories = response.data;
+                    this.categories['featured'] = {key: 'featured', name: 'Featured'};
+                }
             }).catch(err => console.error('Error getting categories', err));
+
             const getProds = axios.get(urlProducts).then(response => {
-                this.products = response.data;
+                if (typeof response.data === 'object') {
+                    this.products = response.data;
+                }
             }).catch(err => console.error('Error getting products', err));
+
             Promise.all([getCats, getProds]).then(resolve => {
                 this.onRouteChange();
             }).catch(err => console.error('Error getting data', err));
         },
         watch: {
             $route (to, from) {
-                console.log('...route changed');
+                // console.log('...route changed');
                 this.onRouteChange();
             }
         },
         methods: {
             routePush() {
-                console.log('...route pushed');
+                // console.log('...route pushed');
                 this.$router.push('/search/?search=' + this.search + '&sort=' + this.sort + '&category=' + this.breadcrumb + '&featured=' + this.featured);
             },
             onRouteChange() {
-                console.log('...onRouteChange');
+                // console.log('...onRouteChange');
                 // console.log('onRouteChange:', this.$route.query);
                 this.sort = this.$route.query.sort || '{"taxonomies.featured": "asc", "date": "desc"}';
                 this.search = this.$route.query.search || '';
-
 
                 let category = this.$route.query.category;
                 if (category) {
@@ -210,6 +232,7 @@
 
                 this.filterCategories(_.last(this.breadcrumb));
                 this.filterProducts();
+                this.filterSpecs();
             },
 
             categoryClick(category){
@@ -232,7 +255,7 @@
             },
 
             filterProducts() {
-                console.log('...filterProducts');
+                // console.log('...filterProducts');
                 // get by category
                 if (this.breadcrumb.length) {
                     let selectedCat = this.categories[_.last(this.breadcrumb)];
@@ -271,6 +294,67 @@
                 this.filteredProducts = _.orderBy(this.filteredProducts, _.keys(sortBy), _.values(sortBy));
 
                 this.routePush();
+            },
+
+            filterSpecs() {
+                let specs = [];
+
+                _.forEach(this.filteredProducts, function (product) {
+                    _.forEach(product.specs, function (value, key) {
+                        if (!(key in specs))
+                            specs[key] = {};
+
+                        if (!('values' in specs[key]))
+                            specs[key]['values'] = {};
+
+                        if (!(value in specs[key]['values']))
+                            specs[key]['values'][value] = false;
+
+                        if (!('qty' in specs[key]))
+                            specs[key]['qty'] = 1;
+                        else
+                            specs[key]['qty'] += 1;
+                    });
+                });
+
+                this.specs = _.fromPairs(
+                    _.orderBy(
+                        _.toPairs(
+                            _.pickBy(specs, function (spec) {
+                                return spec.qty > 1;
+                            })
+                        ), function (spec) {
+                            return spec[1].qty;
+                        }
+                    ).reverse());
+                // console.log(this.specs);
+            },
+            specChanged(key, value, checked, event) {
+                /*console.log('spec changed', key, value, checked);
+                console.log('event:', event.target.checked);
+                console.log(this.specs[key]);*/
+
+                if (event.target.checked) {
+                    this.searchSpecs[key] = value;
+                } else {
+                    delete this.searchSpecs[key];
+                }
+
+                console.log(this.searchSpecs);
+                const searchSpecs = this.searchSpecs;
+
+                let products = _.pickBy(this.filteredProducts, function (p) {
+                    let pp = {};
+                    _.forEach(searchSpecs, function (sVal, sKey) {
+                        if (p.specs[sKey] === value) {
+                            pp[sKey] = p;
+                        }
+                    });
+                    return pp;
+                    // return _.includes(p.specs, value);
+                });
+                console.log('products:', products);
+
             },
 
             reset(){

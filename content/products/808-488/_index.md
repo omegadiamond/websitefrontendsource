@@ -1,10 +1,11 @@
 ---
 title: "Red Ripper Ultralight™ Stone Router without grinder"
+url: /808-488
 description: "The Red Ripper Ultralight™ Stone Router is our lightest router yet! Weighing in at only 11 lbs, you can easily pick up this router with one hand!"
 image: /img/card-example.jpg
 date: 2018-01-29T14:56:13-08:00
-sellable: false
-draft: true
+sellable: true
+draft: false
 taxonomies: 
     - key: featured
       weight: 10

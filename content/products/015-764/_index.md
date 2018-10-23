@@ -3,7 +3,7 @@ title: Red Ripper Ultralight™ Stone Router
 url: /015-764
 description: ""
 image: https://omegadiamond.com/system/files/imagecache/product_full/images/products/IMG_6600%28web%29.jpg
-sellable: false
+sellable: true
 taxonomies: 
     - key: featured
       weight: 30
@@ -21,18 +21,33 @@ attachments:
     - title: Red Ripper Ultralight Parts List
       url: /pdf/RRUL Parts List_20141210-web.pdf
 date: 2018-09-13T10:52:28-07:00
-draft: true
+draft: false
 images:
-- title:
-  url: /products/IMG_7465(web).preview.jpg
-- title: qwerty
-  url: /products/IMG_2211_cropped(web).preview.jpg
-- title: fdsa
-  url: /products/IMG_1498(web)_0.preview.jpg
-- title: asfd
-  url: /products/IMG_1479(web).preview.jpg
-- url: /products/IMG_7441(web).preview.jpg
-- url: /products/IMG_6542(web).preview.jpg
+    - title:
+      url: /products/IMG_7465(web).preview.jpg
+    - title: qwerty
+      url: /products/IMG_2211_cropped(web).preview.jpg
+    - title: fdsa
+      url: /products/IMG_1498(web)_0.preview.jpg
+    - title: asfd
+      url: /products/IMG_1479(web).preview.jpg
+    - url: /products/IMG_7441(web).preview.jpg
+    - url: /products/IMG_6542(web).preview.jpg
+related:
+    - 949-931
+    - blue-ripper-rails
+    - 046-326
+specs: 
+    - key: Cut Speed    
+      value: Up to 4 FPM
+    - key: Motor Installed
+      value: yes
+    - key: Motor Cooling
+      value: air
+    - key: Motor
+      value: 3450 RPM 5hp 220v at 22Amps
+    - key: Fit Blades
+      value: Up to 6"
 ---
 
 The Red Ripper Ultralight™ Stone Router is our lightest router yet! Weighing in at only 11 lbs, you can easily pick up this router with one hand! It is built for profiling sinks and edges, and is perfect for pre-fabs. The built-in hydroplaning base helps the router move smoothly over the surface of the stone without scratching. Works on both natural and engineered stone. While the router is light, it is no lightweight when it comes to the size of bits it can use - almost all standard 7/8 bore with M10-1.5 bolt router bits will fit and be usable, including all common 2, 3, and 4cm bits.  We've even seen guys swing larger bits, but that can cause the machine to become unbalanced, requiring a weight in the back to level things back out again!

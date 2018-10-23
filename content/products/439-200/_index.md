@@ -1,14 +1,15 @@
 ---
 title: Upgrade kit for Blue Ripper Miter Master
+url: /439-200
 description: "Upgrade kit for Blue Ripper Miter Master"
 image: /products/439-200 BRMM Upgrade Kit 2018.jpg
 featured: false
-sellable: false
+sellable: true
 taxonomies: 
     - key: cup_wheels
       weight: 10
 date: 2018-09-13T16:03:07-07:00
-draft: true
+draft: false
 images: 
     - title:
       url: /products/439-200 BRMM Upgrade Kit 2018.jpg

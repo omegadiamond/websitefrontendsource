@@ -1,7 +1,7 @@
 {{ partial "header.html" . }}
 
 
-{{/* ROOT ARRAY */}}
+{{/* ROOT CATEGORIES ARRAY */}}
 {{ range $rootKey, $tax := .Site.Data.taxonomies.taxonomies }}
     {{ if (eq .root true) }} {{/* if not (eq .root false) */}}
         {{ $.Scratch.SetInMap $rootKey "key" $rootKey }}
@@ -12,7 +12,7 @@
     {{ end }}
 {{ end }}
 
-{{/* COMMENTED!!!! ROOT ARRAY: ADDING FEATURED*/}}
+{{/* ROOT CATEGORIES ARRAY: ADDING FEATURED*/}}
 {{ $.Scratch.SetInMap "featured" "key" "featured" }}
 {{ $.Scratch.SetInMap "featured" "name" "Featured" }}
 {{ $.Scratch.SetInMap "featured" "weight" 10 }}
@@ -57,14 +57,14 @@
 
 
 <div class="mdl-grid">
-{{ range $products := where .Sections "Section" "products" }}
+{{ range $products := where $.Site.Sections "Section" "products" }}
     <div class="mdl-cell mdl-cell--12-col">
         <h1>{{ .Title }}</h1>
         {{ .Content }}
     </div>
 
-    {{ range $product := .Sections }}
-        {{ if $product.Params.taxonomies }}
+    {{ range $product := where $products.Sections ".Params.sellable" true }}
+        {{ if and $product.Params.taxonomies $product.Params.title }}
             {{ $sku := index (split .Dir "/") 1}}
             {{ $.Scratch.SetInMap $sku "sku" $sku }}
             {{ $.Scratch.SetInMap $sku "title" $product.Params.title }}
@@ -95,7 +95,10 @@
             <div class="mdl-cell">
 
                 <!-- product card -->
-                <article class="mdl-card mdl-shadow--4dp omg-card-product">
+                {{ partial "product-card.html" (dict "title" $product.title "permalink" $product.permalink "image" $product.image "description" $product.description) }}
+
+                <!-- product card -->
+                <!--<article class="mdl-card mdl-shadow&#45;&#45;4dp omg-card-product">
                     <section class="mdl-card__title">
                         <a href="{{ $product.permalink }}">
                             <h3 class="mdl-card__title-text">{{ $product.title }}</h3>
@@ -114,31 +117,20 @@
                         {{ $product.description }}
                     </section>
 
-                    <!-- actions -->
-                    <section class="mdl-card__actions mdl-card--border">
+                    &lt;!&ndash; actions &ndash;&gt;
+                    <section class="mdl-card__actions mdl-card&#45;&#45;border">
                         <strong class="omg-card-price">$4,321.00</strong>
 
                         <div>
-                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--accent" id="share_{{ $root.key }}_{{ $index }}" title="Share">
-                                <i class="material-icons">share</i>
-                            </button>
-                            <ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect"
-                                for="share_{{ $root.key }}_{{ $index }}">
-                                <li class="mdl-menu__item"><a href="#">Facebook</a> </li>
-                                <li class="mdl-menu__item"><a href="#">Google +</a> </li>
-                                <li class="mdl-menu__item"><a href="#">Copy Link</a> </li>
-                            </ul>
-                            <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="share_{{ $root.key }}_{{ $index }}">Share</div>
-
-                            <!-- add to cart -->
-                            <a id="add_{{ $root.key }}_{{ $index }}" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-button--accent" href="#" title="Add to Cart">
+                            &lt;!&ndash; add to cart &ndash;&gt;
+                            <a class="mdl-button mdl-js-button mdl-button&#45;&#45;icon mdl-js-ripple-effect mdl-button&#45;&#45;accent" href="#" title="Add to Cart">
                                 <i class="material-icons">add_shopping_cart</i>
                             </a>
-                            <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="add_{{ $root.key }}_{{ $index }}">Add to Cart</div>
-                            <!--<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent" title="Add to Cart">Add to Cart</button>-->
+                            &lt;!&ndash;<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button&#45;&#45;raised mdl-button&#45;&#45;accent" title="Add to Cart">Add to Cart</button>&ndash;&gt;
                         </div>
-                    </section><!-- actions -->
-                </article><!-- product card -->
+                    </section>&lt;!&ndash; actions &ndash;&gt;
+                </article>--><!-- product card -->
+
             </div><!-- mdl-cell -->
 
         {{ end }}

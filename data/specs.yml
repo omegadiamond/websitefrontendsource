@@ -9,6 +9,50 @@ specs:
     values:
       - yes
       - no
-  motor_cool
+  motor_cooling:
+    name: Motor Cooling
+    values:
+      - air
+      - water
   motor:
     name: Motor
+    values:
+      - 1730 RPM 2hp 100v at 18Amps
+      - 1730 RPM 3hp 220v at 12.4Amps
+      - 3450 RPM 5hp 220v at 22Amps
+      - 4300 RPM
+      - 6000 RPM
+      - 8000 RPM
+      - 8100 RPM
+  fit_blades:
+    name: Fit Blades (diameter)
+    values:
+      - Up to 8"
+      - Up to 6"
+      - 14"
+      - Up to 14-1/2" (368mm)
+  fit_disks:
+    name: Fit Disks
+    values:
+      - 3"-4"
+  blade_arbor:
+    name: Blade Arbor
+    values:
+      - 66mm
+      - 5/8"
+  cutting_depth:
+    name: Cutting Depth
+    values:
+      - 20mm
+      - 3 cm
+      - 4cm (1-5/8")
+
+  weight:
+    name: Weight
+  width:
+    name: Width (diameter?)
+  grit:
+    name: Grit
+  grain:
+    name: Grain
+

@@ -1,8 +1,9 @@
 ---
 title: Blue Ripper Rails
+url: /blue-rails
 description: "These rails are designed for all Blue Ripper™ branded machines made by Omega Diamond. You can set up the Blue Ripper Rail on a slab and cut with either the Blue Ripper Sr™ or the Blue Ripper Jr™, then move the rail and switch out for the Blue Ripper Miter Master™ to cut the perfect mitered edge all on the same rail!"
 image: /products/IMG_2092.jpg
-sellable: false
+sellable: true
 taxonomies: 
     - key: accessories
     - key: another2
@@ -11,7 +12,7 @@ images:
       url: /products/IMG_2092.jpg
 related: 
 date: 2018-09-14T09:18:40-07:00
-draft: true
+draft: false
 ---
 
 This is the strongest rail on the market. Single piece stainless steel design makes for smooth, accurate cuts across the entire length of your stone.

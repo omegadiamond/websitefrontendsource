@@ -25,6 +25,8 @@
             </div>
         </div>
 
+        {{ .Params.specs }}
+
         <!-- tabs -->
         <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
             <div class="mdl-tabs__tab-bar">
@@ -33,7 +35,12 @@
                     <a href="#{{ lower (replace .Title " " "_") }}_{{ $index }}" class="mdl-tabs__tab">{{ .Title }}</a>
                 {{ end }}
                 {{ if .Params.Attachments }}
-                    <a href="#attachments" class="mdl-tabs__tab">Attachments</a>
+                    {{ if ge (len .Params.Attachments) 1 }}
+                        {{ $firstAttch := index .Params.Attachments 0}}
+                        {{ if ne $firstAttch.url nil }}
+                            <a href="#attachments" class="mdl-tabs__tab">Attachments</a>
+                        {{ end }}
+                    {{ end }}
                 {{ end }}
             </div>
 
@@ -44,8 +51,11 @@
                 <!--  images -->
                 <section>
                     {{ if $.Params.images }}
-                        <h3>Image Gallery</h3>
-                        {{ partial "lightbox-images.html" (dict "images" $.Params.images "productTitle" $.Title) }}
+                    {{ $images := where $.Params.images "url" "ne" nil }}
+                        {{ if $images }}
+                            <h3>Image Gallery</h3>
+                            {{ partial "lightbox-images.html" (dict "images" $images "productTitle" $.Title) }}
+                        {{ end }}
                     {{ end }}
                 </section><!-- images -->
 
@@ -58,12 +68,24 @@
                     {{ end }}
                 </section><!-- videos -->
 
+                <!-- related products -->
                 <section>
-                    <h3>Related Products</h3>
+                    {{ if $.Params.related }}
+                        <h3>Related Products</h3>
+                        <div class="mdl-grid">
 
-                    <!--{{ partial "related-products-test.html" . }}-->
+                            {{ range $section := where .Site.Sections "Section" "products" }}
+                                {{ range $r := $.Params.related }}
+                                <div class="mdl-cell">
+                                    {{ $product := index (where $section.Sections "Dir" (printf "%s%s%s" "products/" $r "/")) 0 }}
+                                    {{ partial "product-card.html" (dict "title" $product.Params.title "permalink" $product.Permalink "image" $product.Params.image "description" $product.Params.description) }}
+                                </div>
+                                {{ end }}
+                            {{ end  }}
+                        </div>
+                    {{ end  }}
                 </section>
-            </div>
+            </div><!-- related products -->
 
             {{ range $index, $section := sort .Pages ".Params.weight" }}
                 <div id="{{ lower (replace .Title " " "_") }}_{{ $index }}" class="mdl-tabs__panel">
@@ -73,14 +95,19 @@
             {{ end }}
 
             {{ if .Params.Attachments }}
-                <div id="attachments" class="mdl-tabs__panel {{ if eq (len .Pages) 0 }} is-active {{ end }}">
-                    <h2>Attachments</h2>
-                    <ul>
-                        {{ range .Params.Attachments }}
-                            <li><a href="{{ .url }}">{{ .title }}</a> </li>
-                        {{ end }}
-                    </ul>
-                </div>
+                {{ if ge (len .Params.Attachments) 1 }}
+                    {{ $firstAttch := index .Params.Attachments 0}}
+                    {{ if ne $firstAttch.url nil }}
+                        <div id="attachments" class="mdl-tabs__panel {{ if eq (len .Pages) 0 }} is-active {{ end }}">
+                            <h2>Attachments</h2>
+                            <ul>
+                                {{ range .Params.Attachments }}
+                                <li><a href="{{ .url }}">{{ .title }}</a> </li>
+                                {{ end }}
+                            </ul>
+                        </div>
+                    {{ end }}
+                {{ end }}
             {{ end }}
         </div>
     </div>

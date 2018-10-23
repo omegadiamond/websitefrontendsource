@@ -1,5 +1,6 @@
 ---
 title: Lockness Vacuum Clamp
+url: /939-444
 description: "The Lockness™ Vacuum Clamp is another in our lineup of extremely versatile tools.  With its strong 9\" stone-grade suction cup, far superior to the plate-glass grade cups often found on the market, the suction cup provides a stronger lockdown for longer."
 image: https://omegadiamond.com/system/files/imagecache/product_full/images/products/Lockness%20Monster.jpg
 sellable: true
