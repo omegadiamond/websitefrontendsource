@@ -78,8 +78,7 @@
                     <li class="mdl-list__item" v-for="(checked, value) in spec.values">
                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
                             <input type="checkbox" class="mdl-checkbox__input"
-                                :checked="checked"
-                                v-on:change="specChanged(key, value, checked, $event)">
+                                v-on:change="specChanged(key, value, checked, $event)"> <!--:checked="checked"-->
                             [[ value ]]
                         </label>
                     </li>
@@ -214,7 +213,7 @@
         methods: {
             routePush() {
                 // console.log('...route pushed');
-                this.$router.push('/search/?search=' + this.search + '&sort=' + this.sort + '&category=' + this.breadcrumb + '&featured=' + this.featured);
+                this.$router.push('/search/?search=' + this.search + '&sort=' + this.sort + '&category=' + this.breadcrumb);
             },
             onRouteChange() {
                 // console.log('...onRouteChange');
@@ -334,26 +333,56 @@
                 console.log('event:', event.target.checked);
                 console.log(this.specs[key]);*/
 
+                // console.log(event.target.checked);
+
                 if (event.target.checked) {
-                    this.searchSpecs[key] = value;
+                    if (!_.has(this.searchSpecs, key)) {
+                        this.searchSpecs[key] = [];
+                    }
+                    if (!_.includes(this.searchSpecs[key], value)) {
+                        this.searchSpecs[key].push(value);
+                    }
                 } else {
-                    delete this.searchSpecs[key];
+                    if (_.has(this.searchSpecs, key)) {
+                        if (_.includes(this.searchSpecs[key], value)) {
+                            _.remove(this.searchSpecs[key], function (sVal) {
+                                return sVal === value;
+                            })
+                        }
+
+                        if (this.searchSpecs[key].length < 1) {
+                            delete this.searchSpecs[key];
+                        }
+                    }
                 }
 
                 console.log(this.searchSpecs);
                 const searchSpecs = this.searchSpecs;
 
-                let products = _.pickBy(this.filteredProducts, function (p) {
-                    let pp = {};
-                    _.forEach(searchSpecs, function (sVal, sKey) {
-                        if (p.specs[sKey] === value) {
-                            pp[sKey] = p;
+                let products = _.pickBy(this.products, function (p) {
+
+                    var skus = [];
+
+                    _.forEach(searchSpecs, function (sArr, sKey) {
+                        // console.log(sKey + ':', sArr);
+                        if (_.includes(sArr, p.specs[sKey])) {
+                            if (!_.includes(skus, p.sku)) skus.push(p.sku);
                         }
                     });
-                    return pp;
-                    // return _.includes(p.specs, value);
+
+                    return _.includes(skus, p.sku);
                 });
                 console.log('products:', products);
+                console.log(this.specs);
+                console.log('- - - - - - - -');
+
+                if (Object.keys(searchSpecs).length >= 1) {
+                    this.filteredProducts = products;
+                } else {
+                    this.filteredProducts = this.products;
+                }
+
+                this.routePush();
 
             },
 
