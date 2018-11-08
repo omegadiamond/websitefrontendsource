@@ -14,7 +14,7 @@
     "title": {{- if $p.title -}}{{- $p.title | jsonify -}}{{- else -}}{{- $p.sku | jsonify -}}{{- end -}},
     "permalink": {{- $p.permalink | jsonify -}},
     "description": {{- $p.description | jsonify -}},
-    "image": {{- if $p.image -}}{{- $p.image | jsonify -}}{{- else -}}""{{- end -}},
+    "image": {{- if $p.image -}}{{- (printf "%s%s" $.Site.BaseURL $p.image) | jsonify -}}{{- else -}}""{{- end -}},
     "taxonomies": {
       {{- if $p.taxonomies -}}
         {{- range $tindex, $t := where $p.taxonomies "key" "ne" nil -}}

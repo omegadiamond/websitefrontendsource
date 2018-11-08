@@ -1,4 +1,4 @@
-{{ partial "header.html" . }}
+{{ partial "header.html" (dict "context" .) }}
 
 <style>
     .omg-tut-step{
@@ -191,4 +191,4 @@
     </div>
 </div>
 
-{{ partial "footer.html" . }}
+{{ partial "footer.html" (dict "context" . ) }}

@@ -1,4 +1,4 @@
-{{ partial "header.html" . }}
+{{ partial "header.html" (dict "context" . ) }}
 
 
 {{/* ROOT CATEGORIES ARRAY */}}
@@ -88,14 +88,14 @@
 {{ range $rootKey, $root := sort ($.Scratch.Get "roots") "weight" }}
     {{ if ($.Scratch.Get (printf "%s%s" (string $root.key) "_products")) }}
         <div class="mdl-cell mdl-cell--12-col">
-            <h2><a href="/search/?category={{ $root.key }}">{{ $root.name }}</a> </h2>
+            <h2><a href="{{ $.Site.BaseURL }}search/?category={{ $root.key }}">{{ $root.name }}</a> </h2>
         </div>
         {{ range $index, $product := sort ($.Scratch.Get (printf "%s%s" $root.key "_products")) "weight" | first 9 }}
 
             <div class="mdl-cell">
 
                 <!-- product card -->
-                {{ partial "product-card.html" (dict "title" $product.title "permalink" $product.permalink "image" $product.image "description" $product.description) }}
+                {{ partial "product-card.html" (dict "baseURL" $.Site.BaseURL "title" $product.title "permalink" $product.permalink "image" $product.image "description" $product.description) }}
 
                 <!-- product card -->
                 <!--<article class="mdl-card mdl-shadow&#45;&#45;4dp omg-card-product">
@@ -138,7 +138,7 @@
         <!-- View More -->
         <div class="mdl-cell mdl-cell--12-col mdl-typography--text-center">
             <h4>
-                <a href="/search/?category={{ $root.key }}" class="mdl-button mdl-js-button mdl-color--amber-400">
+                <a href="{{ $.Site.BaseURL }}search/?category={{ $root.key }}" class="mdl-button mdl-js-button mdl-color--amber-400">
                     View all {{ $root.name }}
                     <i class="material-icons">arrow_forward</i>
                 </a>
@@ -152,4 +152,4 @@
 
 
 {{ $.Scratch.Delete "roots" }}
-{{ partial "footer.html" . }}
+{{ partial "footer.html" (dict "context" . ) }}

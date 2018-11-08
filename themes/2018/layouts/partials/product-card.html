@@ -1,4 +1,3 @@
-
 <!-- product card -->
 <article class="mdl-card mdl-shadow--4dp omg-card-product">
     <section class="mdl-card__title">
@@ -10,7 +9,7 @@
     {{ if .image}}
     <section class="mdl-card__media">
         <a href="{{ .permalink }}">
-            <img src="{{ .image }}" alt="Card Example">
+            <img src="{{ .baseURL }}{{ .image }}" alt="Card Example">
         </a>
     </section>
     {{ end }}

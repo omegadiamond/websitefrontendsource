@@ -1,10 +1,11 @@
+{{ $baseURL := .baseURL }}
 <ul id="lightboard-for-lightbox-img" class="mdlext-lightboard mdlext-js-lightboard mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events">
     {{ range .images }}
         {{ if .url }}
             <li class="mdlext-lightboard__slide" data-details="[{ 'name': 'Title', 'value': 'll:{{ if .title }} {{ .title }} {{ else }} {{ $.productTitle }} {{ end }}' }]">
-                <a href="{{ .url }}" class="mdlext-lightboard__slide__frame">
+                <a href="{{ $baseURL }}{{ .url }}" class="mdlext-lightboard__slide__frame">
                     <figure>
-                        <img src="{{ .url }}" title="{{ if .title }} {{ .title }} {{ else }} {{ $.productTitle }} {{ end }}" alt="{{ if .title }} {{ .title }} {{ else }} {{ $.productTitle }} {{ end }}">
+                        <img src="{{ $baseURL }}{{ .url }}" title="{{ if .title }}{{.title }}{{ else }}{{ $.productTitle }}{{ end }}" alt="{{ if .title }}{{ .title }} {{ else }}{{ $.productTitle }}{{ end }}">
                         <figcaption>{{ if .title }} {{ .title }} {{ else }} {{ $.productTitle }} {{ end }}</figcaption>
                     </figure>
                 </a>
@@ -12,7 +13,6 @@
         {{ end }}
     {{ end }}
 </ul>
-
 
 <dialog id="lightbox-dialog-img" class="mdlext-dialog">
     <div id="lightbox-img" class="mdlext-lightbox mdlext-js-lightbox mdl-card mdl-shadow--4dp">

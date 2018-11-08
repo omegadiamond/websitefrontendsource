@@ -1,4 +1,4 @@
-{{ partial "header.html" . }}
+{{ partial "header.html" (dict "context" .) }}
 
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--12-col">
@@ -8,4 +8,4 @@
 
     {{ .Content }}
 
-{{ partial "footer.html" . }}
+{{ partial "footer.html" (dict "context" . ) }}
